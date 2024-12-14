@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collapsible Menu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0c2746;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu {
+      width: 300px;
+      margin: 20px auto;
+      background-color: #132c52;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .menu-item {
+      border-top: 1px solid #1b3a6b;
+    }
+
+    .menu-header {
+      padding: 15px;
+      background-color: #102a4b;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s;
+    }
+
+    .menu-header:hover {
+      background-color: #1b3a6b;
+    }
+
+    .menu-header span {
+      font-size: 16px;
+    }
+
+    .menu-header .arrow {
+      transition: transform 0.3s;
+    }
+
+    .menu-header.collapsed .arrow {
+      transform: rotate(-90deg);
+    }
+
+    .menu-content {
+      padding: 10px 15px;
+      display: none;
+      background-color: #0f2c4f;
+    }
+
+    .menu-content.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu">
+    <div class="menu-item">
+      <div class="menu-header">
+        <span>1. Networking Today</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="menu-content">
+        <p>Introduction to Networking.</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <span>2. Basic Switch and End Device Configuration</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="menu-content">
+        <p>How to configure switches and devices.</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <span>3. Protocols and Models</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="menu-content">
+        <p>Understanding protocols and networking models.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get all menu headers
+    const headers = document.querySelectorAll('.menu-header');
+
+    headers.forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+
+        // Toggle visibility of the content
+        content.classList.toggle('visible');
+
+        // Toggle arrow rotation
+        header.classList.toggle('collapsed');
+      });
+    });
+  </script>
+</body>
+</html>
