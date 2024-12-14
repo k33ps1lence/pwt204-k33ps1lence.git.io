@@ -4,142 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CCNA - Cisco Certified Network Associate</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: rgb(255, 255, 255);
-            font-family: Georgia, 'Times New Roman', Times, serif;
-        }
-        .header {
-            display: flex;
-            width: 100%;
-            height: 70px;
-            background-color: rgb(0, 0, 0);
-            align-items: center;
-            justify-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .title {
-            background-color: rgb(188, 88, 88);
-            padding: 2px 3px;
-            border-radius: 5px;
-        }
-        .logo {
-            font-size: 24px;
-            color: rgb(0, 0, 0);
-            font-family: cursive;
-            color: white;
-        }
-        .container {
-            flex: 1 1 80%;
-            display: block;
-            width: 100%;
-            height: 90vh;
-            justify-content: space-between;
-        }
-        .main {
-            display: flex;
-        }
-        .module {
-            flex: 1;
-            background-color: aqua;
-            gap: 35px;
-        }
-        .navbars {
-            display: flex;
-            align-items: center;
-            justify-items: center;
-            gap: 20px;
-        }
-        .navbars a {
-            text-decoration: none;
-            font-size: 24px;
-            color: aliceblue;
-            
-        }
-        .menu {
-            width: 300px;
-            margin: 0;
-            background-color: #5b7eb3;
-            overflow: hidden;
-            transform: translateX(-300px); /* Ẩn sidebar ban đầu */
-            transition: transform 0.3s ease;
-            position: absolute;
-            top: 70px;
-        }
-        .sidebar.open {
-            transform: translateX(0); /* Hiển thị sidebar */
-        }
-
-        .menu-item {
-            border-top: 1px solid #1b3a6b;
-        }
-        .menu-header {
-            padding: 15px;
-            background-color: #102a4b;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-        .menu-header:hover {
-            background-color: #1b3a6b;
-        }
-
-        .menu-header span {
-            font-size: 16px;
-            color: rgb(170, 170, 170);
-        }
-        .menu-header span a {
-            text-decoration: none;
-            font-size: 16px;
-            color: rgb(170, 170, 170);
-        }
-
-        .menu-header .arrow {
-            transition: transform 0.3s;
-        }
-
-        .menu-header.collapsed .arrow {
-            transform: rotate(-90deg);
-        }
-
-        .menu-content {
-            padding: 10px 15px;
-            display: none;
-            background-color: #0f2c4f;
-        }
-
-        .menu-content.visible {
-            display: block;
-        }
-        .toggle-btn {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 1000;
-            background-color: #333;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-        }
-        .content {
-            flex: 1;
-            margin-left: 0;
-            padding: 20px;
-            transition: margin-left 0.3s ease;
-        }
-        .content.shift {
-            margin-left: 300px; /* Dịch nội dung sang phải khi mở sidebar */
-        }
-    </style>
+   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header></header>
@@ -148,7 +13,7 @@
         <div style="display: flex; flex: 1 1 80%; justify-content: space-between;">
             <div>
                 <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
-                <div class="logo">Tin Lang Thang</div>
+                <div class="logo"> <a href="../../index.html">Tin Lang Thang</a></div>
             </div>
 
             <div class="logo title">Switching, Routing, and Wireless Essentials</div>
@@ -258,37 +123,129 @@
                     </div>
                 </div>
                 <div class="content" id="content">
-                    <h1>Welcome</h1>
-                    <p>Click on the menu icon to toggle the sidebar.</p>
+                    <h1>Introduction</h1>
+                    <h2>Why should I take this module?</h2>
+                    <p>Welcome to Basic Device Configuration!</p>
+                    <p> Welcome to the first module in CCNA Switching, Routing, and Wireless Essentials! You know that switches and routers come with some built-in configuration, so why would you need to learn to further configure switches and routers? </p>
+                    <p>Imagine that you purchased a model train set. After you had set it up, you realized that the track was just a simple oval shape and that the train cars only ran clockwise. You might want the track to be a figure eight shape with 
+                        an overpass. You might want to have two trains that operate independently of each other and are able to move in different directions. How could you make that happen? You would need to reconfigure the track and the controls. 
+                        It is the same with network devices. As a network administrator you need detailed control of the devices in your network. This means precisely configuring switches and routers so that your network does what you want it to do. 
+                        This module has many Syntax Checker and Packet Tracer activities to help you develop these skills. Let’s get started!</p>
+                    <h2>What will I learn to do in this module?</h2>
+                    <p>Module Title: Basic Device Configuration</p>
+                    <p>Module Objective: Configure devices using security best practices.</p>
+                    <table>
+                        <tr>
+                            <th>Topic Title</th>
+                            <th>Topic Objective</th>
+                        </tr>
+                        <tr>
+                            <td>Configure a Switch with Initial Settings</td>
+                            <td>Configure initial settings on a Cisco switch.</td>
+                        </tr>
+                        <tr>
+                            <td>Configure Switch Ports</td>
+                            <td>Configure switch ports to meet network requirements.</td>
+                        </tr>
+                        <tr>
+                            <td>Secure Remote Access</td>
+                            <td>Configure secure management access on a switch.</td>
+                        </tr>
+                        <tr>
+                            <td>Basic Router Configuration</td>
+                            <td>	Configure basic settings on a router to route between two directly-connected networks, using CLI.</td>
+                        </tr>
+                        <tr>
+                            <td>Verify Directly Connected Networks</td>
+                            <td>	Verify connectivity between two networks that are directly connected to a router.</td>
+                        </tr>
+                    </table>
+                    <h1>Configure a Switch with Initial Settings</h1>
+                    <h2>Switch Boot Sequence</h2>
+                    <p>Before you can configure a switch, you need to turn it on and allow it to go through the five-step boot sequence. This topic covers the basics of configuring a switch and includes a lab at the end.</p>
+
+                    <p>After a Cisco switch is powered on, it goes through the following five-step boot sequence:</p>
+                    <p>Step 1: First, the switch loads a power-on self-test (POST) program stored in ROM. POST checks the CPU subsystem. It tests the CPU, DRAM, and the portion of the flash device that makes up the flash file system.
+                        <br>Step 2: Next, the switch loads the boot loader software. The boot loader is a small program stored in ROM that is run immediately after POST successfully completes.
+                        <br>Step 3: The boot loader performs low-level CPU initialization. It initializes the CPU registers, which control where physical memory is mapped, the quantity of memory, and its speed.
+                        <br>Step 4: The boot loader initializes the flash file system on the system board.
+                        <br>Step 5: Finally, the boot loader locates and loads a default IOS operating system software image into memory and gives control of the switch over to the IOS.</p>
+                    <h2>The boot system Command</h2>
+                    <p>The switch attempts to automatically boot by using information in the BOOT environment variable. If this variable is not set, the switch attempts to load and execute the first executable file it can find. On Catalyst 2960 Series switches, the image file is normally contained in a directory that has the same name as the image file (excluding the .bin file extension).</p>
+                    <p>The IOS operating system then initializes the interfaces using the Cisco IOS commands found in the startup-config file. The startup-config file is called config.text and is located in flash.</p>
+                    <p>In the example, the BOOT environment variable is set using the boot system global configuration mode command. Notice that the IOS is located in a distinct folder and the folder path is specified. Use the command show boot to see what the current IOS boot file is set to.</p>
+                    <h3>S1(config)# boot system flash:/c2960-lanbasek9-mz.150-2.SE/c2960-lanbasek9-mz.150-2.SE.bin</h3>
+                    <p>The table defines each part of the boot system command.</p>
+                    <table>
+                        <tr>
+                            <th>Table caption Command</th>
+                            <th>Definition</th>
+                        </tr>
+                        <tr>
+                            <td>boot system</td>
+                            <td>The main command</td>
+                        </tr>
+                        <tr>
+                            <td>flash: </td>
+                            <td>The storage device</td>
+                        </tr>
+                        <tr>
+                            <td>c2960-lanbasek9-mz.150-2.SE/</td>
+                            <td>The path to the file system</td>
+                        </tr>
+                        <tr>
+                            <td>c2960-lanbasek9-mz.150-2.SE.bin</td>
+                            <td>The path to the file system</td>
+                        </tr>
+                    </table>
+                    <h2>Switch LED Indicators</h2>
+                    <p>Cisco Catalyst switches have several status LED indicator lights. You can use the switch LEDs to quickly monitor switch activity and performance. Switches of different models and feature sets will have different LEDs and their placement on the front panel of the switch may also vary.</p>
+                    <p>The figure shows the switch LEDs and the Mode button for a Cisco Catalyst 2960 switch.</p>
+                    <img src="https://contenthub.netacad.com/courses/srwe-dl/af9ea780-34fe-11eb-b1b2-9b1b0c1f7e0d/afb58ae1-34fe-11eb-b1b2-9b1b0c1f7e0d/assets/c9569b61-1c27-11ea-af09-3b2e6521927c.jpg" alt="">
+                    <p>The Mode button (7 in the figure) is used to toggle through port status, port duplex, port speed, and if supported, the Power over Ethernet (PoE) status of the port LEDs (8 in the figure).</p>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>System LED </h3> <p> Shows whether the system is receiving power and is functioning properly. If the LED is off, it means the system is not powered on. If the LED is green, the system is operating normally. If the LED is amber, the system is receiving power but is not functioning properly.</p>'">1 SYST</button>
+                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>Redundant Power System (RPS) LED</h3> <p>Shows the RPS status. If the LED is off, the RPS is off, or it is not properly connected. If the LED is green, the RPS is connected and ready to provide backup power. If the LED is blinking green, the RPS is connected but is unavailable because it is providing power to another device. If the LED is amber, the RPS is in standby mode, or in a fault condition. If the LED is blinking amber, the internal power supply in the switch has failed, and the RPS is providing power.</p>'">2 RPS</button>
+                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>Port Status LED</h3> <p>Indicates that the port status mode is selected when the LED is green. This is the default mode. When selected, the port LEDs will display colors with different meanings. If the LED is off, there is no link, or the port was administratively shut down. If the LED is green, a link is present. If the LED is blinking green, there is activity and the port is sending or receiving data. If the LED is alternating green-amber, there is a link fault. If the LED is amber, the port is blocked to ensure that a loop does not exist in the forwarding domain and is not forwarding data (typically, ports will remain in this state for the first 30 seconds after being activated). If the LED is blinking amber, the port is blocked to prevent a possible loop in the forwarding domain.</p>'">3 STAT</button>
+                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>Port Duplex LED</h3> <p>Indicates that the port duplex mode is selected when the LED is green. When selected, port LEDs that are off are in half-duplex mode. If the port LED is green, the port is in full-duplex mode.</p>'">4 DUPLX</button>
+                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>Port Speed LED</h3><p>Indicates that the port speed mode is selected. When selected, the port LEDs will display colors with different meanings. If the LED is off, the port is operating at 10 Mbps. If the LED is green, the port is operating at 100 Mbps. If the LED is blinking green, the port is operating at 1000 Mbps.</p>'">5 SPEED</button>
+                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>Power over Ethernet (PoE) Mode LED</h3><p>If PoE is supported, a PoE mode LED will be present. If the LED is off, it indicates the PoE mode is not selected and that none of the ports have been denied power or placed in a fault condition. If the LED is blinking amber, the PoE mode is not selected but at least one of the ports has been denied power or has a PoE fault. If the LED is green, it indicates the PoE mode is selected and the port LEDs will display colors with different meanings. If the port LED is off, the PoE is off. If the port LED is green, the PoE is on. If the port LED is alternating green-amber, PoE is denied because providing power to the powered device will exceed the switch power capacity. If the LED is blinking amber, PoE is off because of a fault. If the LED is amber, PoE for the port has been disabled.</p>'">6 PoE</button>
+                    </div>
+                    <p id="ctn"></p>
+                    <h2>Recovering from a System Crash</h2>
+                    <p>The boot loader provides access into the switch if the operating system cannot be used because of missing or damaged system files. The boot loader has a command-line that provides access to the files stored in flash memory.</p>
+                    <p>The boot loader can be accessed through a console connection following these steps:</p>
+                    <p>Step 1. Connect a PC by console cable to the switch console port. Configure terminal emulation software to connect to the switch.
+                        <br>Step 2. Unplug the switch power cord.
+                        <br>Step 3. Reconnect the power cord to the switch and, within 15 seconds, press and hold down the Mode button while the System LED is still flashing green.
+                        <br>Step 4. Continue pressing the Mode button until the System LED turns briefly amber and then solid green; then release the Mode button.
+                        <br>Step 5. The boot loader switch: prompt appears in the terminal emulation software on the PC.</p>
+                    <p>Type the help or ? at the boot loader prompt to view a list of available commands.</p>
+                    <p>By default, the switch attempts to automatically boot up by using information in the BOOT environment variable. To view the path of the switch BOOT environment variable type the set command. Then, initialize the flash file system using the flash_init command to view the current files in flash, as shown in the output.</p>
+                    <img src="/blogs/img/02.png" alt="">
+                    <p>After flash has finished initializing you can enter the dir flash: command to view the directories and files in flash, as shown in the output.</p>
+                    <img src="/blogs/img/03.png" alt="">
+                    <p>Enter the BOOT=flash command to change the BOOT environment variable path the switch uses to load the new IOS in flash. To verify the new BOOT environment variable path, issue the set command again. Finally, to load the new IOS type the boot command without any arguments, as shown in the output.</p>
+                    <img src="/blogs/img/04.png" alt="">
+                    <p>The boot loader commands support initializing flash, formatting flash, installing a new IOS, changing the BOOT environment variable and recovery of lost or forgotten passwords.</p>
+                    <h2>Switch Management Access</h2>
+                    <p>To prepare a switch for remote management access, the switch must have a switch virtual interface (SVI) configured with an IPv4 address and subnet mask or an IPv6 address and a prefix length for IPv6. The SVI is a virtual interface, not a physical port on the switch. Keep in mind that to manage the switch from a remote network, the switch must be configured with a default gateway. This is very similar to configuring the IP address information on host devices.</p>
+                    <img src="/blogs/img/05.png" alt="">
+                    <h2>Switch SVI Configuration Example</h2>
+                    <p>By default, the switch is configured to have its management controlled through VLAN 1. All ports are assigned to VLAN 1 by default. For security purposes, it is considered a best practice to use a VLAN other than VLAN 1 for the management VLAN, such as VLAN 99 in the example.</p>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" onclick="document.getElementById('s').innerHTML = 
+                        '<h4>Step 1</h4> <p>From VLAN interface configuration mode, an IPv4 address and subnet mask is applied to the management SVI of the switch. Specifically, SVI VLAN 99 will be assigned the 172.17.99.11/24 IPv4 address and the 2001:db8:acad:99::1/64 IPv6 address as shown.</p>'">STEP 1</button>
+                        <button type="button" onclick="document.getElementById('s').innerHTML = '<h4>Step 2</h4>'">STEP 2</button>
+                        <button type="button" onclick="document.getElementById('s').innerHTML = '<h4>Step 3</h4> <p></p>'">STEP 3</button>
+                    </div>
+                    <p id="s"></p>
+                    <div style="height: 200vh; width: 100%; background-color:#333 ;"></div>
                 </div>
+                
                 
             </div>
 
-    <script>
-        // Get all menu headers
-        const headers = document.querySelectorAll('.menu-header');
-    
-        headers.forEach(header => {
-          header.addEventListener('click', () => {
-            const content = header.nextElementSibling;
-    
-            // Toggle visibility of the content
-            content.classList.toggle('visible');
-    
-            // Toggle arrow rotation
-            header.classList.toggle('collapsed');
-          });
-        });
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const content = document.getElementById('content');
-
-            // Toggle class "open" cho sidebar
-            sidebar.classList.toggle('open');
-
-            // Toggle class "shift" cho nội dung
-            content.classList.toggle('shift');
-        }
-      </script>
+    <script src="module2.js"></script>
 </body>
 </html>
