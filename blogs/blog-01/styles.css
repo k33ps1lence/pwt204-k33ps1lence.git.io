@@ -4,6 +4,30 @@ body {
     background-color: rgb(255, 255, 255);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+h1 {
+    color: rgb(38, 145, 56);
+    padding: 10px 20px;
+    background-color: #c5f7c2;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+h2 {
+    color: #0f5f08;
+}
+h4 {
+    padding: 10px 20px;
+    background-color: #1d1d1d;
+    border-radius: 10px;
+    color: white;
+}
+h3 {
+    padding: 10px 20px;
+}
+p {
+    padding: 10px 20px;
+    background-color: #e2f2ea;
+    border-radius: 10px;
+}
 .header {
     display: flex;
     width: 100%;
@@ -134,12 +158,35 @@ body {
     margin-left: 0;
     padding: 20px;
     transition: margin-left 0.3s ease;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.content button {
+    width: 120px;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #308128;
+    border: 1px;
+    color: aliceblue;
+    cursor: pointer;
+}
+.content button:hover {
+    transform: scale(1.05);
+}
+.content button:active {
+    background-color: #1e4e19;
+}
+.content .subcontent {
+    background-color: #c4fbbf;
+    padding: 10px 20px;
+    border-radius: 10px;
 }
 .content.shift {
     margin-left: 300px; /* Dịch nội dung sang phải khi mở sidebar */
 }
 td, th {
-border: 1px solid #dddddd;
-text-align: left;
-padding: 8px;
+    border: 0.55px solid #040000;
+    text-align: left;
+    padding: 8px;
 }
