@@ -10,8 +10,8 @@ function toggleSidebar() {
 }
 function showContentByButton(number) {
   const content = {
-    1: `<h4>Step 1</h4> 
-        <h4>Configure the Management Interface</h4> 
+    1: `<h3>Step 1</h3> 
+        <h3>Configure the Management Interface</h3> 
         <p>From VLAN interface configuration mode, an IPv4 address and subnet mask 
         is applied to the management SVI of the switch. Specifically, SVI VLAN 99 will 
         be assigned the 172.17.99.11/24 IPv4 address and the 2001:db8:acad:99::1/64 
@@ -57,8 +57,8 @@ function showContentByButton(number) {
           </tr>
         </table>`
         ,
-    2: `<h4>Step 2</h4>
-        <h4>Configure the Default Gateway</h4> 
+    2: `<h3>Step 2</h3>
+        <h3>Configure the Default Gateway</h3> 
         <p>The switch should be configured with a default gateway if it will be managed remotely from networks that are not directly connected.</p>
         <p>Note: Because, it will receive its default gateway information from a router advertisement (RA) message, the switch does not require an IPv6 default gateway.</p>
          <table>
@@ -83,8 +83,8 @@ function showContentByButton(number) {
             <td>S1# copy running-config startup-config</td>
           </tr>
           </table>`,
-    3: `<h4>Step 3</h4>
-        <h4>Verify Configuration</h4>
+    3: `<h3>Step 3</h3>
+        <h3>Verify Configuration</h3>
         <p>The show ip interface brief and show ipv6 interface brief 
         commands are useful for determining the status of both physical 
         and virtual interfaces. The output shown confirms that interface
@@ -92,7 +92,7 @@ function showContentByButton(number) {
          <p>Note: An IP address applied to the SVI is only for remote management 
          access to the switch; this does not allow the switch to route Layer 3 
          packets.</p>
-         <img src="/blogs/img/06.png" alt="">`,
+         <img src="https://i.pinimg.com/1200x/08/0f/f8/080ff87c0f11fefd6ec4643f10f0d245.jpg" alt="">`,
   };
   if (number == 1) {
     document.getElementById('s').innerHTML = content[1];

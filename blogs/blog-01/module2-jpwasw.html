@@ -221,15 +221,39 @@
                         <br>Step 5. The boot loader switch: prompt appears in the terminal emulation software on the PC.</p>
                     <p>Type the help or ? at the boot loader prompt to view a list of available commands.</p>
                     <p>By default, the switch attempts to automatically boot up by using information in the BOOT environment variable. To view the path of the switch BOOT environment variable type the set command. Then, initialize the flash file system using the flash_init command to view the current files in flash, as shown in the output.</p>
-                    <img src="/blogs/img/02.png" alt="">
+                    <h4>
+                        switch: set
+                        <br>BOOT=flash:/c2960-lanbasek9-mz.122-55.SE7/c2960-lanbasek9-mz.122-55.SE7.bin
+                        <br>(output omitted)
+                        <br>switch: flash_init
+                        <br>Initializing Flash...
+                        <br>flashfs[0]: 2 files, 1 directories
+                        <br>flashfs[0]: 0 orphaned files, 0 orphaned directories
+                        <br>flashfs[0]: Total bytes: 32514048
+                        <br>flashfs[0]: Bytes used: 11838464
+                        <br>flashfs[0]: Bytes available: 20675584
+                        <br>flashfs[0]: flashfs fsck took 10 seconds.
+                        <br>...done Initializing Flash.
+                    </h4>
                     <p>After flash has finished initializing you can enter the dir flash: command to view the directories and files in flash, as shown in the output.</p>
-                    <img src="/blogs/img/03.png" alt="">
+                    <h4>
+                        switch: dir flash: 
+                        <br>Directory of flash:/
+                        <br>____2  -rwx  11834846_________________c2960-lanbasek9-mz.150-2.SE8.bin
+                        <br>____3  -rwx  2072_____________________multiple-fs
+                    </h4>
                     <p>Enter the BOOT=flash command to change the BOOT environment variable path the switch uses to load the new IOS in flash. To verify the new BOOT environment variable path, issue the set command again. Finally, to load the new IOS type the boot command without any arguments, as shown in the output.</p>
-                    <img src="/blogs/img/04.png" alt="">
+                    <h4>
+                        switch: BOOT=flash:c2960-lanbasek9-mz.150-2.SE8.bin
+                        <br>switch: set
+                        <br>BOOT=flash:c2960-lanbasek9-mz.150-2.SE8.bin
+                        <br>(output omitted)
+                        <br>switch: boot
+                    </h4>
                     <p>The boot loader commands support initializing flash, formatting flash, installing a new IOS, changing the BOOT environment variable and recovery of lost or forgotten passwords.</p>
                     <h2>Switch Management Access</h2>
                     <p>To prepare a switch for remote management access, the switch must have a switch virtual interface (SVI) configured with an IPv4 address and subnet mask or an IPv6 address and a prefix length for IPv6. The SVI is a virtual interface, not a physical port on the switch. Keep in mind that to manage the switch from a remote network, the switch must be configured with a default gateway. This is very similar to configuring the IP address information on host devices.</p>
-                    <img src="/blogs/img/05.png" alt="">
+                    <img src="https://i.pinimg.com/736x/cb/dd/06/cbdd06546e7ad79efb7ba9dc4b78413b.jpg" alt="">
                     <h2>Switch SVI Configuration Example</h2>
                     <p>By default, the switch is configured to have its management controlled through VLAN 1. All ports are assigned to VLAN 1 by default. For security purposes, it is considered a best practice to use a VLAN other than VLAN 1 for the management VLAN, such as VLAN 99 in the example.</p>
                     <div style="display: flex; gap: 10px;">
@@ -253,7 +277,7 @@
                         often resulting in collisions. Half-duplex connections are typically seen in older hardware, such as hubs. 
                         Half-duplex hubs have been replaced by switches that use full-duplex communications by default.</p>
                     <p>The figure illustrates full-duplex and half-duplex communication.</p>
-                    <img src="/blogs/img/07.png" alt="">
+                    <img src="https://i.pinimg.com/736x/a8/7d/32/a87d325932e8e6d1511197f28a75e451.jpg" alt="">
                     <p>Gigabit Ethernet and 10 Gb NICs require full-duplex connections to operate. In full-duplex mode, 
                         the collision detection circuit on the NIC is disabled. Full-duplex offers 100 percent efficiency
                         in both directions (transmitting and receiving).</p>
@@ -263,7 +287,7 @@
                          configuration mode command to manually specify the speed. For example, both switches in the topology should 
                          always operate in full-duplex at 100 Mbps.
                         </p>
-                    <img src="/blogs/img/08.png" alt="">
+                    <img src="https://i.pinimg.com/1200x/14/7a/b2/147ab27a2a01d937ad8c01915c128f82.jpg"" alt="">
                     <p>The table shows the commands for S1. The same commands can be applied to S2.</p>
                     <table>
                         <tr>
@@ -313,12 +337,12 @@
                     <p>With auto-MDIX enabled, either type of cable can be used to connect to other devices, and the interface automatically adjusts to communicate successfully. 
                         On newer Cisco switches, the mdix auto interface configuration mode command enables the feature. When using auto-MDIX on an interface, the interface speed and duplex must be set to auto so that the feature operates correctly.</p>
                     <p>The command to enable auto-MDIX is issued in interface configuration mode on the switch as shown:</p>
-                    <h3>S1(config-if)# mdix auto</h3>
+                    <h4>S1(config-if)# mdix auto</h4>
                     <p>Note: The auto-MDIX feature is enabled by default on Catalyst 2960 and Catalyst 3560 switches but is not available on the older Catalyst 2950 and Catalyst 3550 switches.</p>
                     <p>To examine the auto-MDIX setting for a specific interface, use the show controllers ethernet-controller command with the phy keyword. To limit the output to lines referencing auto-MDIX, use the include MDIX filter. 
                         As shown the output indicates On or Off for the feature.</p>
-                    <h3>S1# show controllers ethernet-controller fa0/1 phy | include MDIX <br> 
-                        Auto-MDIX           :  On   [AdminState=1   Flags=0x00052248]</h3>
+                    <h4>S1# show controllers ethernet-controller fa0/1 phy | include MDIX <br> 
+                        Auto-MDIX           :  On   [AdminState=1   Flags=0x00052248]</h44>
                     <h2>Switch Verification Commands</h2>
                     <p>The table summarizes some of the more useful switch verification commands.</p>
                     <table>
@@ -374,13 +398,42 @@
                         <li>VLAN 99 is configured with an IPv4 address of 172.17.99.11 255.255.255.0</li>
                         <li>The default gateway is set to 172.17.99.1</li>
                     </ul>
-                    <img src="/blogs/img/09.png" alt="">
+                    <h4>
+                        S1# show running-config
+                        <br>Building configuration...
+                        <br>Current configuration : 1466 bytes
+                        <br>!
+                        <br>interface FastEthernet0/18
+                        <br>switchport access vlan 99
+                        <br>switchport mode access
+                        <br>!
+                        <br>(output omitted)
+                        <br>!
+                        <br>interface Vlan99
+                        <br>ip address 172.17.99.11 255.255.255.0
+                        <br>ipv6 address 2001:DB8:ACAD:99::1/64
+                        <br>!
+                        <br>ip default-gateway 172.17.99.1 
+                    </h4>
                     <p>The show interfaces command is another commonly used command, which displays status and statistics information on the network interfaces of the switch. The show interfaces command is frequently used when configuring and monitoring network devices.</p>
                     <p>The first line of the output for the show interfaces fastEthernet 0/18 command indicates that the FastEthernet 0/18 interface is up/up, meaning that it is operational. Further down, the output shows that the duplex is full and the speed is 100 Mbps.</p>
-                    <img src="/blogs/img/10.png" alt="">
+                    <h4>
+                        S1# show interfaces fastEthernet 0/18
+                        <br>FastEthernet0/18 is up, line protocol is up (connected)
+                        <br>Hardware is Fast Ethernet, address is 0025.83e6.9092 (bia 0025.83e6.9092)
+                        <br>MTU 1500 bytes, BW 100000 Kbit/sec, DLY 100 usec,
+                        <br>    reliability 255/255, txload 1/255, rxload 1/255
+                        <br>Encapsulation ARPA, loopback not set
+                        <br>Keepalive set (10 sec)
+                        <br>Full-duplex, 100Mb/s, media type is 10/100BaseTX
+                    </h4>
                     <h2>Network Access Layer Issues</h2>
                     <p>The output from the show interfaces command is useful for detecting common media issues. One of the most important parts of this output is the display of the line and data link protocol status, as shown in the example.</p>
-                    <img src="/blogs/img/11.png" alt="">
+                    <h4>
+                        S1# show interfaces fastEthernet 0/18
+                        <br>FastEthernet0/18 is up, line protocol is up (connected)
+                        <br>Hardware is Fast Ethernet, address is 0025.83e6.9092 (bia 0025.83e6.9092)MTU 1500 bytes, BW 100000 Kbit/sec, DLY 100 usec,
+                    </h4>
                     <p>The first parameter (FastEthernet0/18 is up) refers to the hardware layer and indicates whether the interface is receiving a carrier detect signal. The second parameter (line protocol is up) refers to the data link layer and indicates whether the data link layer protocol keepalives are being received.</p>
                     <p>Based on the output of the show interfaces command, possible problems can be fixed as follows:</p>
                     <ul>
@@ -389,7 +442,7 @@
                         <li>If the interface is administratively down, it has been manually disabled (the shutdown command has been issued) in the active configuration.</li>
                     </ul>
                     <p>The show interfaces command output displays counters and statistics for the FastEthernet0/18 interface, as highlighted in the example.</p>
-                    <img src="/blogs/img/12.png" alt="">
+                    <img src="https://i.pinimg.com/736x/98/6c/19/986c19d2eb50a79cfb375d7cc78b8e7c.jpg" alt="">
                     <p>Some media errors are not severe enough to cause the circuit to fail but do cause network performance issues. The table explains some of these common errors which can be detected using the show interfaces command.</p>
                     <table>
                         <tr>
@@ -440,7 +493,7 @@
                     <h2>Troubleshooting Network Access Layer Issues</h2>
                     <p>Most issues that affect a switched network are encountered during the original implementation. Theoretically, after it is installed, a network continues to operate without problems. However, cabling gets damaged, configurations change, and new devices are connected to the switch that require switch configuration changes. Ongoing maintenance and troubleshooting of the network infrastructure is required.</p>
                     <p>To troubleshoot scenarios involving no connection, or a bad connection, between a switch and another device, follow the general process shown in the figure.</p>
-                    <img src="/blogs/img/13.png" alt="">
+                    <img src="https://i.pinimg.com/736x/c7/5d/18/c75d185890f7ed123dabe6bac1453bc1.jpg" alt="">
                     <p>Use the show interfaces command to check the interface status.</p>
                     <p>If the interface is down:</p>
                     <ul>
@@ -467,7 +520,8 @@
                     <img src="https://contenthub.netacad.com/courses/srwe-dl/af9ea780-34fe-11eb-b1b2-9b1b0c1f7e0d/afb58ae5-34fe-11eb-b1b2-9b1b0c1f7e0d/assets/c964a522-1c27-11ea-af09-3b2e6521927c.png" alt="">
                     <h2>Verify the Switch Supports SSH</h2>
                     <p>To enable SSH on a Catalyst 2960 switch, the switch must be using a version of the IOS software including cryptographic (encrypted) features and capabilities. Use the show version command on the switch to see which IOS the switch is currently running. An IOS filename that includes the combination “k9” supports cryptographic (encrypted) features and capabilities. The example shows the output of the show version command.</p>
-                    <img src="/blogs/img/14.png" alt="">
+                    <h4>S1# show version
+                        <br>Cisco IOS Software, C2960 Software (C2960-LANBASEK9-M), Version 15.0(2)SE7, RELEASE SOFTWARE (fc1)</h4>
                     <h2>Configure SSH</h2>
                     <p>Before configuring SSH, the switch must be minimally configured with a unique hostname and the correct network connectivity settings.</p>
                     <div style="display: flex; gap: 10px;">
@@ -541,7 +595,7 @@
                         dual stack network topology consisting of multiple hosts, switches, and routers with interfaces configured with both IPv4 and IPv6 addresses
                         
                         </p>
-                    <img src="/blogs/img/16.png" alt="">
+                    <img src="https://i.pinimg.com/1200x/05/c5/97/05c5974e3ee0f745d9970165609ab062.jpg" alt="">
                     <h2>Configure Router Interfaces</h2>
                     <p>Routers support LANs and WANs and can interconnect different types of networks; therefore, they support many types of interfaces. For example, G2 ISRs have one or two integrated Gigabit Ethernet interfaces and High-Speed WAN Interface Card (HWIC) slots to accommodate other types of network interfaces, including serial, DSL, and cable interfaces.
 
@@ -598,7 +652,7 @@
                             <br>There are several show commands that can be used to verify the operation and configuration of an interface. The topology in the figure is used to demonstrate the verification of router interface settings.
                             
                             </p>
-                        <img src="/blogs/img/17.png" alt="">
+                        <img src="https://i.pinimg.com/736x/2c/be/a0/2cbea00a35c6a26b70d3cadacd4e9284.jpg" alt="">
                         <p>The following commands are especially useful to quickly identify the status of an interface:</p>
                         <ul>
                             <li>show ip interface brief and show ipv6 interface brief - These display a summary for all interfaces including the IPv4 or IPv6 address of the interface and current operational status.</li>
