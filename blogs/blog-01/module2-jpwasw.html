@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CCNA - Cisco Certified Network Associate</title>
-   <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Header Section -->
     <header></header>
+
+    <!-- Main Header -->
     <div class="header">
         <div style="flex: 1 1 10%;"></div>
         <div style="display: flex; flex: 1 1 80%; justify-content: space-between;">
             <div>
                 <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
-                <div class="logo"> <a href="../../index.html">Tin Lang Thang</a></div>
+                <div class="logo">
+                    <a href="../../index.html">Tin Lang Thang</a>
+                </div>
             </div>
             <div class="logo title">Switching, Routing, and Wireless Essentials</div>
             <nav class="navbars">
@@ -24,789 +29,97 @@
         </div>
         <div style="flex: 1 1 10%;"></div>
     </div>
-            <div class="main">
-                <div class="menu sidebar" id="sidebar">
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="module1-naasw.html" style="text-decoration: underline;">1. Basic Device Configuration</a></span>
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">2. Switching Concepts</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">3. VLANs</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">4. Inter-VLAN Routing</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">5. STP Concepts</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">6. EtherChannel</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">7. DHCPv4</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">8. SLAAC and DHCPv6</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">9. RHRP Concepts</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">10. LAN Security Concepts</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">11. Switch Security Configuration</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">12. WLAN Concepts</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">13. WLAN Configuration</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">14. Routing Concepts</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">15. IP Static Routing</a></span>
-                        </div>
-                    </div>
-            
-                    <div class="menu-item">
-                        <div class="menu-header">
-                            <span><a href="#">16. Troubeshoot Static and Default Routes</a></span>
-                        </div>
-                    </div>
+
+    <!-- Sidebar and Main Content -->
+    <div class="main">
+        <div class="menu sidebar" id="sidebar">
+            <!-- Menu Items -->
+            <div class="menu-item">
+                <div class="menu-header" onclick="content(1)">
+                    <span >1. Basic Device Configuration</span>
                 </div>
-                <div class="content" id="content">
-                    <h1>Introduction</h1>
-                    <h2>Why should I take this module?</h2>
-                    <p>Welcome to Basic Device Configuration!</p>
-                    <p> Welcome to the first module in CCNA Switching, Routing, and Wireless Essentials! You know that switches and routers come with some built-in configuration, so why would you need to learn to further configure switches and routers? </p>
-                    <p>Imagine that you purchased a model train set. After you had set it up, you realized that the track was just a simple oval shape and that the train cars only ran clockwise. You might want the track to be a figure eight shape with 
-                        an overpass. You might want to have two trains that operate independently of each other and are able to move in different directions. How could you make that happen? You would need to reconfigure the track and the controls. 
-                        It is the same with network devices. As a network administrator you need detailed control of the devices in your network. This means precisely configuring switches and routers so that your network does what you want it to do. 
-                        This module has many Syntax Checker and Packet Tracer activities to help you develop these skills. Let’s get started!</p>
-                    <h2>What will I learn to do in this module?</h2>
-                    <p>Module Title: Basic Device Configuration</p>
-                    <p>Module Objective: Configure devices using security best practices.</p>
-                    <table>
-                        <tr>
-                            <th>Topic Title</th>
-                            <th>Topic Objective</th>
-                        </tr>
-                        <tr>
-                            <td>Configure a Switch with Initial Settings</td>
-                            <td>Configure initial settings on a Cisco switch.</td>
-                        </tr>
-                        <tr>
-                            <td>Configure Switch Ports</td>
-                            <td>Configure switch ports to meet network requirements.</td>
-                        </tr>
-                        <tr>
-                            <td>Secure Remote Access</td>
-                            <td>Configure secure management access on a switch.</td>
-                        </tr>
-                        <tr>
-                            <td>Basic Router Configuration</td>
-                            <td>	Configure basic settings on a router to route between two directly-connected networks, using CLI.</td>
-                        </tr>
-                        <tr>
-                            <td>Verify Directly Connected Networks</td>
-                            <td>	Verify connectivity between two networks that are directly connected to a router.</td>
-                        </tr>
-                    </table>
-                    <h1>Configure a Switch with Initial Settings</h1>
-                    <h2>Switch Boot Sequence</h2>
-                    <p>Before you can configure a switch, you need to turn it on and allow it to go through the five-step boot sequence. This topic covers the basics of configuring a switch and includes a lab at the end.</p>
-
-                    <p>After a Cisco switch is powered on, it goes through the following five-step boot sequence:</p>
-                    <p>Step 1: First, the switch loads a power-on self-test (POST) program stored in ROM. POST checks the CPU subsystem. It tests the CPU, DRAM, and the portion of the flash device that makes up the flash file system.
-                        <br>Step 2: Next, the switch loads the boot loader software. The boot loader is a small program stored in ROM that is run immediately after POST successfully completes.
-                        <br>Step 3: The boot loader performs low-level CPU initialization. It initializes the CPU registers, which control where physical memory is mapped, the quantity of memory, and its speed.
-                        <br>Step 4: The boot loader initializes the flash file system on the system board.
-                        <br>Step 5: Finally, the boot loader locates and loads a default IOS operating system software image into memory and gives control of the switch over to the IOS.</p>
-                    <h2>The boot system Command</h2>
-                    <p>The switch attempts to automatically boot by using information in the BOOT environment variable. If this variable is not set, the switch attempts to load and execute the first executable file it can find. On Catalyst 2960 Series switches, the image file is normally contained in a directory that has the same name as the image file (excluding the .bin file extension).</p>
-                    <p>The IOS operating system then initializes the interfaces using the Cisco IOS commands found in the startup-config file. The startup-config file is called config.text and is located in flash.</p>
-                    <p>In the example, the BOOT environment variable is set using the boot system global configuration mode command. Notice that the IOS is located in a distinct folder and the folder path is specified. Use the command show boot to see what the current IOS boot file is set to.</p>
-                    <h3>S1(config)# boot system flash:/c2960-lanbasek9-mz.150-2.SE/c2960-lanbasek9-mz.150-2.SE.bin</h3>
-                    <p>The table defines each part of the boot system command.</p>
-                    <table>
-                        <tr>
-                            <th>Table caption Command</th>
-                            <th>Definition</th>
-                        </tr>
-                        <tr>
-                            <td>boot system</td>
-                            <td>The main command</td>
-                        </tr>
-                        <tr>
-                            <td>flash: </td>
-                            <td>The storage device</td>
-                        </tr>
-                        <tr>
-                            <td>c2960-lanbasek9-mz.150-2.SE/</td>
-                            <td>The path to the file system</td>
-                        </tr>
-                        <tr>
-                            <td>c2960-lanbasek9-mz.150-2.SE.bin</td>
-                            <td>The path to the file system</td>
-                        </tr>
-                    </table>
-                    <h2>Switch LED Indicators</h2>
-                    <p>Cisco Catalyst switches have several status LED indicator lights. You can use the switch LEDs to quickly monitor switch activity and performance. Switches of different models and feature sets will have different LEDs and their placement on the front panel of the switch may also vary.</p>
-                    <p>The figure shows the switch LEDs and the Mode button for a Cisco Catalyst 2960 switch.</p>
-                    <img src="https://contenthub.netacad.com/courses/srwe-dl/af9ea780-34fe-11eb-b1b2-9b1b0c1f7e0d/afb58ae1-34fe-11eb-b1b2-9b1b0c1f7e0d/assets/c9569b61-1c27-11ea-af09-3b2e6521927c.jpg" alt="">
-                    <p>The Mode button (7 in the figure) is used to toggle through port status, port duplex, port speed, and if supported, the Power over Ethernet (PoE) status of the port LEDs (8 in the figure).</p>
-                    <div style="display: flex; gap: 10px;">
-                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>System LED </h3> <p> Shows whether the system is receiving power and is functioning properly. If the LED is off, it means the system is not powered on. If the LED is green, the system is operating normally. If the LED is amber, the system is receiving power but is not functioning properly.</p>'">1 SYST</button>
-                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>Redundant Power System (RPS) LED</h3> <p>Shows the RPS status. If the LED is off, the RPS is off, or it is not properly connected. If the LED is green, the RPS is connected and ready to provide backup power. If the LED is blinking green, the RPS is connected but is unavailable because it is providing power to another device. If the LED is amber, the RPS is in standby mode, or in a fault condition. If the LED is blinking amber, the internal power supply in the switch has failed, and the RPS is providing power.</p>'">2 RPS</button>
-                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>Port Status LED</h3> <p>Indicates that the port status mode is selected when the LED is green. This is the default mode. When selected, the port LEDs will display colors with different meanings. If the LED is off, there is no link, or the port was administratively shut down. If the LED is green, a link is present. If the LED is blinking green, there is activity and the port is sending or receiving data. If the LED is alternating green-amber, there is a link fault. If the LED is amber, the port is blocked to ensure that a loop does not exist in the forwarding domain and is not forwarding data (typically, ports will remain in this state for the first 30 seconds after being activated). If the LED is blinking amber, the port is blocked to prevent a possible loop in the forwarding domain.</p>'">3 STAT</button>
-                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>Port Duplex LED</h3> <p>Indicates that the port duplex mode is selected when the LED is green. When selected, port LEDs that are off are in half-duplex mode. If the port LED is green, the port is in full-duplex mode.</p>'">4 DUPLX</button>
-                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>Port Speed LED</h3><p>Indicates that the port speed mode is selected. When selected, the port LEDs will display colors with different meanings. If the LED is off, the port is operating at 10 Mbps. If the LED is green, the port is operating at 100 Mbps. If the LED is blinking green, the port is operating at 1000 Mbps.</p>'">5 SPEED</button>
-                        <button type="button" onclick="document.getElementById('ctn').innerHTML = '<h3>Power over Ethernet (PoE) Mode LED</h3><p>If PoE is supported, a PoE mode LED will be present. If the LED is off, it indicates the PoE mode is not selected and that none of the ports have been denied power or placed in a fault condition. If the LED is blinking amber, the PoE mode is not selected but at least one of the ports has been denied power or has a PoE fault. If the LED is green, it indicates the PoE mode is selected and the port LEDs will display colors with different meanings. If the port LED is off, the PoE is off. If the port LED is green, the PoE is on. If the port LED is alternating green-amber, PoE is denied because providing power to the powered device will exceed the switch power capacity. If the LED is blinking amber, PoE is off because of a fault. If the LED is amber, PoE for the port has been disabled.</p>'">6 PoE</button>
-                    </div>
-                    <p class="subcontent" id="ctn"></p>
-                    <h2>Recovering from a System Crash</h2>
-                    <p>The boot loader provides access into the switch if the operating system cannot be used because of missing or damaged system files. The boot loader has a command-line that provides access to the files stored in flash memory.</p>
-                    <p>The boot loader can be accessed through a console connection following these steps:</p>
-                    <p>Step 1. Connect a PC by console cable to the switch console port. Configure terminal emulation software to connect to the switch.
-                        <br>Step 2. Unplug the switch power cord.
-                        <br>Step 3. Reconnect the power cord to the switch and, within 15 seconds, press and hold down the Mode button while the System LED is still flashing green.
-                        <br>Step 4. Continue pressing the Mode button until the System LED turns briefly amber and then solid green; then release the Mode button.
-                        <br>Step 5. The boot loader switch: prompt appears in the terminal emulation software on the PC.</p>
-                    <p>Type the help or ? at the boot loader prompt to view a list of available commands.</p>
-                    <p>By default, the switch attempts to automatically boot up by using information in the BOOT environment variable. To view the path of the switch BOOT environment variable type the set command. Then, initialize the flash file system using the flash_init command to view the current files in flash, as shown in the output.</p>
-                    <h4>
-                        switch: set
-                        <br>BOOT=flash:/c2960-lanbasek9-mz.122-55.SE7/c2960-lanbasek9-mz.122-55.SE7.bin
-                        <br>(output omitted)
-                        <br>switch: flash_init
-                        <br>Initializing Flash...
-                        <br>flashfs[0]: 2 files, 1 directories
-                        <br>flashfs[0]: 0 orphaned files, 0 orphaned directories
-                        <br>flashfs[0]: Total bytes: 32514048
-                        <br>flashfs[0]: Bytes used: 11838464
-                        <br>flashfs[0]: Bytes available: 20675584
-                        <br>flashfs[0]: flashfs fsck took 10 seconds.
-                        <br>...done Initializing Flash.
-                    </h4>
-                    <p>After flash has finished initializing you can enter the dir flash: command to view the directories and files in flash, as shown in the output.</p>
-                    <h4>
-                        switch: dir flash: 
-                        <br>Directory of flash:/
-                        <br>____2  -rwx  11834846_________________c2960-lanbasek9-mz.150-2.SE8.bin
-                        <br>____3  -rwx  2072_____________________multiple-fs
-                    </h4>
-                    <p>Enter the BOOT=flash command to change the BOOT environment variable path the switch uses to load the new IOS in flash. To verify the new BOOT environment variable path, issue the set command again. Finally, to load the new IOS type the boot command without any arguments, as shown in the output.</p>
-                    <h4>
-                        switch: BOOT=flash:c2960-lanbasek9-mz.150-2.SE8.bin
-                        <br>switch: set
-                        <br>BOOT=flash:c2960-lanbasek9-mz.150-2.SE8.bin
-                        <br>(output omitted)
-                        <br>switch: boot
-                    </h4>
-                    <p>The boot loader commands support initializing flash, formatting flash, installing a new IOS, changing the BOOT environment variable and recovery of lost or forgotten passwords.</p>
-                    <h2>Switch Management Access</h2>
-                    <p>To prepare a switch for remote management access, the switch must have a switch virtual interface (SVI) configured with an IPv4 address and subnet mask or an IPv6 address and a prefix length for IPv6. The SVI is a virtual interface, not a physical port on the switch. Keep in mind that to manage the switch from a remote network, the switch must be configured with a default gateway. This is very similar to configuring the IP address information on host devices.</p>
-                    <img src="https://i.pinimg.com/736x/cb/dd/06/cbdd06546e7ad79efb7ba9dc4b78413b.jpg" alt="">
-                    <h2>Switch SVI Configuration Example</h2>
-                    <p>By default, the switch is configured to have its management controlled through VLAN 1. All ports are assigned to VLAN 1 by default. For security purposes, it is considered a best practice to use a VLAN other than VLAN 1 for the management VLAN, such as VLAN 99 in the example.</p>
-                    <div style="display: flex; gap: 10px;">
-                        <button type="button" onclick="showContentByButton(1)">Step 1</button>
-                        <button type="button" onclick="showContentByButton(2)">Step 2</button>
-                        <button type="button" onclick="showContentByButton(3)">Step 3</button>
-                    </div>
-                    <p class="subcontent" id="s"></p>
-                    <h1>Configure Switch Ports</h1>
-                    <h2>Duplex Communication</h2>
-                    <p>The ports of a switch can be configured independently for different needs. This topic covers how to configure switch ports, how to verify your configurations, common errors, and how to troubleshoot switch configuration issues.</p>
-                    <p>Full-duplex communication increases bandwidth efficiency by allowing both ends of 
-                        a connection to transmit and receive data simultaneously. 
-                        This is also known as bidirectional communication and it requires
-                         microsegmentation. A microsegmented LAN is created when a switch 
-                         port has only one device connected and is operating in full-duplex mode. 
-                         There is no collision domain associated with a switch port operating in full-duplex 
-                         mode.</p>
-                    <p>Unlike full-duplex communication, half-duplex communication is unidirectional. 
-                        Half-duplex communication creates performance issues because data can flow in only one direction at a time, 
-                        often resulting in collisions. Half-duplex connections are typically seen in older hardware, such as hubs. 
-                        Half-duplex hubs have been replaced by switches that use full-duplex communications by default.</p>
-                    <p>The figure illustrates full-duplex and half-duplex communication.</p>
-                    <img src="https://i.pinimg.com/736x/a8/7d/32/a87d325932e8e6d1511197f28a75e451.jpg" alt="">
-                    <p>Gigabit Ethernet and 10 Gb NICs require full-duplex connections to operate. In full-duplex mode, 
-                        the collision detection circuit on the NIC is disabled. Full-duplex offers 100 percent efficiency
-                        in both directions (transmitting and receiving).</p>
-                    <h2>Configure Switch Ports at the Physical Layer</h2>
-                    <p>Switch ports can be manually configured with specific duplex and speed settings. Use the duplex interface 
-                        configuration mode command to manually specify the duplex mode for a switch port. Use the speed interface
-                         configuration mode command to manually specify the speed. For example, both switches in the topology should 
-                         always operate in full-duplex at 100 Mbps.
-                        </p>
-                    <img src="https://i.pinimg.com/1200x/14/7a/b2/147ab27a2a01d937ad8c01915c128f82.jpg"" alt="">
-                    <p>The table shows the commands for S1. The same commands can be applied to S2.</p>
-                    <table>
-                        <tr>
-                            <th>Task</th>
-                            <th>IOS Commands</th>
-                        </tr>
-                        <tr>
-                            <td>Enter global configuration mode.</td>
-                            <td><code>S1# configure terminal</code></td>
-                        </tr>
-                        <tr>
-                            <td>Enter interface configuration mode.</td>
-                            <td><code>S1(config)# interface FastEthernet 0/1</code></td>
-                        </tr>
-                        <tr>
-                            <td>Configure the interface duplex.</td>
-                            <td><code>S1(config-if)# duplex full</code></td>
-                        </tr>
-                        <tr>
-                            <td>Configure the interface speed.</td>
-                            <td><code>S1(config-if)# speed 100</code></td>
-                        </tr>
-                        <tr>
-                            <td>Return to the privileged EXEC mode.</td>
-                            <td><code>S1(config-if)# end</code></td>
-                        </tr>
-                        <tr>
-                            <td>Save the running config to the startup config.</td>
-                            <td><code>S1# copy running-config startup-config</code></td>
-                        </tr>
-                    </table>
-                    <p>The default setting for both duplex and speed for switch ports on Cisco Catalyst 2960 and 3560 
-                        switches is auto. The 10/100/1000 ports operate in either half- or full-duplex mode when they 
-                        are set to 10 or 100 Mbps and operate only in full-duplex mode when it is set to 1000 Mbps (1 Gbps). 
-                        Autonegotiation is useful when the speed and duplex settings of the device connecting to the port are 
-                        unknown or may change. When connecting to known devices such as servers, dedicated workstations, or 
-                        network devices, a best practice is to manually set the speed and duplex settings.</p>
-                    <p>When troubleshooting switch port issues, it is important that the duplex and speed settings should be checked.</p>
-                    <p>Note: Mismatched settings for the duplex mode and speed of switch ports can cause connectivity issues. Autonegotiation failure creates mismatched settings.</p>
-                    <p>All fiber-optic ports, such as 1000BASE-SX ports, operate only at one preset speed and are always full-duplex.</p>
-                    <h2>Auto-MDIX</h2>
-                    <p>Until recently, certain cable types (straight-through or crossover) were required when connecting devices. Switch-to-switch or switch-to-router connections 
-                        required using different Ethernet cables. Using the automatic medium-dependent interface crossover (auto-MDIX) feature on an interface eliminates this problem. 
-                        When auto-MDIX is enabled, the interface automatically detects the required cable connection type (straight-through or crossover) and configures the connection 
-                        appropriately. When connecting to switches without the auto-MDIX feature, straight-through cables must be used to connect to devices such as servers, workstations, 
-                        or routers. Crossover cables must be used to connect to other switches or repeaters.</p>
-                    <p>With auto-MDIX enabled, either type of cable can be used to connect to other devices, and the interface automatically adjusts to communicate successfully. 
-                        On newer Cisco switches, the mdix auto interface configuration mode command enables the feature. When using auto-MDIX on an interface, the interface speed and duplex must be set to auto so that the feature operates correctly.</p>
-                    <p>The command to enable auto-MDIX is issued in interface configuration mode on the switch as shown:</p>
-                    <h4>S1(config-if)# mdix auto</h4>
-                    <p>Note: The auto-MDIX feature is enabled by default on Catalyst 2960 and Catalyst 3560 switches but is not available on the older Catalyst 2950 and Catalyst 3550 switches.</p>
-                    <p>To examine the auto-MDIX setting for a specific interface, use the show controllers ethernet-controller command with the phy keyword. To limit the output to lines referencing auto-MDIX, use the include MDIX filter. 
-                        As shown the output indicates On or Off for the feature.</p>
-                    <h4>S1# show controllers ethernet-controller fa0/1 phy | include MDIX <br> 
-                        Auto-MDIX           :  On   [AdminState=1   Flags=0x00052248]</h44>
-                    <h2>Switch Verification Commands</h2>
-                    <p>The table summarizes some of the more useful switch verification commands.</p>
-                    <table>
-                        <tr>
-                            <th>Task</th>
-                            <th>IOS Commands</th>
-                        </tr>
-                        <tr>
-                            <td>Display interface status and configuration.</td>
-                            <td><code>S1# show interfaces [<i>interface-id</i>]</code></td>
-                        </tr>
-                        <tr>
-                            <td>Display current startup configuration.</td>
-                            <td><code>S1# show startup-config</code></td>
-                        </tr>
-                        <tr>
-                            <td>Display current running configuration.</td>
-                            <td><code>S1# show running-config</code></td>
-                        </tr>
-                        <tr>
-                            <td>Display information about flash file system.</td>
-                            <td><code>S1# show flash</code></td>
-                        </tr>
-                        <tr>
-                            <td>Display system hardware and software status.</td>
-                            <td><code>S1# show version</code></td>
-                        </tr>
-                        <tr>
-                            <td>Display history of command entered.</td>
-                            <td><code>S1# show history</code></td>
-                        </tr>
-                        <tr>
-                            <td>Display IP information about an interface.</td>
-                            <td>
-                                <code>S1# show ip interface [<i>interface-id</i>]</code><br>
-                                or<br>
-                                <code>S1# show ipv6 interface [<i>interface-id</i>]</code>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Display the MAC address table.</td>
-                            <td>
-                                <code>S1# show mac-address-table</code><br>
-                                or <br>
-                                <code>S1# show mac address-table</code>
-                            </td>
-                        </tr>
-                    </table>
-                    <h2>Verify Switch Port Configuration</h2>
-                    <p>The show running-config command can be used to verify that the switch has been correctly configured. From the sample abbreviated output on S1, some important information is shown in the figure:</p>
-                    <ul>
-                        <li>Fast Ethernet 0/18 interface is configured with the management VLAN 99</li>
-                        <li>VLAN 99 is configured with an IPv4 address of 172.17.99.11 255.255.255.0</li>
-                        <li>The default gateway is set to 172.17.99.1</li>
-                    </ul>
-                    <h4>
-                        S1# show running-config
-                        <br>Building configuration...
-                        <br>Current configuration : 1466 bytes
-                        <br>!
-                        <br>interface FastEthernet0/18
-                        <br>switchport access vlan 99
-                        <br>switchport mode access
-                        <br>!
-                        <br>(output omitted)
-                        <br>!
-                        <br>interface Vlan99
-                        <br>ip address 172.17.99.11 255.255.255.0
-                        <br>ipv6 address 2001:DB8:ACAD:99::1/64
-                        <br>!
-                        <br>ip default-gateway 172.17.99.1 
-                    </h4>
-                    <p>The show interfaces command is another commonly used command, which displays status and statistics information on the network interfaces of the switch. The show interfaces command is frequently used when configuring and monitoring network devices.</p>
-                    <p>The first line of the output for the show interfaces fastEthernet 0/18 command indicates that the FastEthernet 0/18 interface is up/up, meaning that it is operational. Further down, the output shows that the duplex is full and the speed is 100 Mbps.</p>
-                    <h4>
-                        S1# show interfaces fastEthernet 0/18
-                        <br>FastEthernet0/18 is up, line protocol is up (connected)
-                        <br>Hardware is Fast Ethernet, address is 0025.83e6.9092 (bia 0025.83e6.9092)
-                        <br>MTU 1500 bytes, BW 100000 Kbit/sec, DLY 100 usec,
-                        <br>    reliability 255/255, txload 1/255, rxload 1/255
-                        <br>Encapsulation ARPA, loopback not set
-                        <br>Keepalive set (10 sec)
-                        <br>Full-duplex, 100Mb/s, media type is 10/100BaseTX
-                    </h4>
-                    <h2>Network Access Layer Issues</h2>
-                    <p>The output from the show interfaces command is useful for detecting common media issues. One of the most important parts of this output is the display of the line and data link protocol status, as shown in the example.</p>
-                    <h4>
-                        S1# show interfaces fastEthernet 0/18
-                        <br>FastEthernet0/18 is up, line protocol is up (connected)
-                        <br>Hardware is Fast Ethernet, address is 0025.83e6.9092 (bia 0025.83e6.9092)MTU 1500 bytes, BW 100000 Kbit/sec, DLY 100 usec,
-                    </h4>
-                    <p>The first parameter (FastEthernet0/18 is up) refers to the hardware layer and indicates whether the interface is receiving a carrier detect signal. The second parameter (line protocol is up) refers to the data link layer and indicates whether the data link layer protocol keepalives are being received.</p>
-                    <p>Based on the output of the show interfaces command, possible problems can be fixed as follows:</p>
-                    <ul>
-                        <li>If the interface is up and the line protocol is down, a problem exists. There could be an encapsulation type mismatch, the interface on the other end could be error-disabled, or there could be a hardware problem. </li>
-                        <li>If the line protocol and the interface are both down, a cable is not attached, or some other interface problem exists. For example, in a back-to-back connection, the other end of the connection may be administratively down. </li>
-                        <li>If the interface is administratively down, it has been manually disabled (the shutdown command has been issued) in the active configuration.</li>
-                    </ul>
-                    <p>The show interfaces command output displays counters and statistics for the FastEthernet0/18 interface, as highlighted in the example.</p>
-                    <img src="https://i.pinimg.com/736x/98/6c/19/986c19d2eb50a79cfb375d7cc78b8e7c.jpg" alt="">
-                    <p>Some media errors are not severe enough to cause the circuit to fail but do cause network performance issues. The table explains some of these common errors which can be detected using the show interfaces command.</p>
-                    <table>
-                        <tr>
-                            <th>Error Type</th>
-                            <th>Description</th>
-                        </tr>
-                        <tr>
-                            <td class="bold">Input Errors</td>
-                            <td>Total number of errors. It includes runts, giants, no buffer, CRC, frame, overrun, and ignored counts.</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Runts</td>
-                            <td>Frames that are discarded because they are smaller than the minimum frame size for the medium. For instance, any Ethernet frame that is less than 64 bytes is considered a runt.</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Giants</td>
-                            <td>Frames that are discarded because they exceed the maximum frame size for the medium. For example, any Ethernet frame that is greater than 1,518 bytes is considered a giant.</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">CRC</td>
-                            <td>CRC errors are generated when the calculated checksum is not the same as the checksum received.</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Output Errors</td>
-                            <td>Sum of all errors that prevented the final transmission of datagrams out of the interface that is being examined.</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Collisions</td>
-                            <td>Number of messages retransmitted because of an Ethernet collision.</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Late Collisions</td>
-                            <td>A collision that occurs after 512 bits of the frame have been transmitted.</td>
-                        </tr>
-                    </table>
-                    <h2>Interface Input and Output Errors</h2>
-                    <p>“Input errors” is the sum of all errors in datagrams that were received on the interface being examined. This includes runts, giants, CRC, no buffer, frame, overrun, and ignored counts. The reported input errors from the show interfaces command include the following:</p>
-                    <ul>
-                        <li>Runt Frames - Ethernet frames that are shorter than the 64-byte minimum allowed length are called runts. Malfunctioning NICs are the usual cause of excessive runt frames, but they can also be caused by collisions. </li>
-                        <li>Giants - Ethernet frames that are larger than the maximum allowed size are called giants. </li>
-                        <li>CRC errors - On Ethernet and serial interfaces, CRC errors usually indicate a media or cable error. Common causes include electrical interference, loose or damaged connections, or incorrect cabling. If you see many CRC errors, there is too much noise on the link and you should inspect the cable. You should also search for and eliminate noise sources.</li>
-                    </ul>
-                    <p>“Output errors” is the sum of all errors that prevented the final transmission of datagrams out the interface that is being examined. The reported output errors from the show interfaces command include the following:</p>
-                    <ul>
-                        <li>Collisions - Collisions in half-duplex operations are normal. However, you should never see collisions on an interface configured for full-duplex communication.</li>
-                        <li>Late collisions - A late collision refers to a collision that occurs after 512 bits of the frame have been transmitted. Excessive cable lengths are the most common cause of late collisions. Another common cause is duplex misconfiguration. For example, you could have one end of a connection configured for full-duplex and the other for half-duplex. You would see late collisions on the interface that is configured for half-duplex. In that case, you must configure the same duplex setting on both ends. A properly designed and configured network should never have late collisions.</li>
-                    </ul>
-                    <h2>Troubleshooting Network Access Layer Issues</h2>
-                    <p>Most issues that affect a switched network are encountered during the original implementation. Theoretically, after it is installed, a network continues to operate without problems. However, cabling gets damaged, configurations change, and new devices are connected to the switch that require switch configuration changes. Ongoing maintenance and troubleshooting of the network infrastructure is required.</p>
-                    <p>To troubleshoot scenarios involving no connection, or a bad connection, between a switch and another device, follow the general process shown in the figure.</p>
-                    <img src="https://i.pinimg.com/736x/c7/5d/18/c75d185890f7ed123dabe6bac1453bc1.jpg" alt="">
-                    <p>Use the show interfaces command to check the interface status.</p>
-                    <p>If the interface is down:</p>
-                    <ul>
-                        <li>Check to make sure that the proper cables are being used. Additionally, check the cable and connectors for damage. If a bad or incorrect cable is suspected, replace the cable.</li>
-                        <li>If the interface is still down, the problem may be due to a mismatch in speed setting. The speed of an interface is typically autonegotiated; therefore, even if it is manually applied to one interface, the connecting interface should autonegotiate accordingly. If a speed mismatch does occur through misconfiguration, or a hardware or software issue, then that may result in the interface going down. Manually set the same speed on both connection ends if a problem is suspected.
-                        </li>
-                    </ul>
-                    <p>If the interface is up, but issues with connectivity are still present:</p>
-                    <ul>
-                        <li>Using the show interfaces command, check for indications of excessive noise. Indications may include an increase in the counters for runts, giants, and CRC errors. If there is excessive noise, first find and remove the source of the noise, if possible. Also, verify that the cable does not exceed the maximum cable length and check the type of cable that is used.</li>
-                        <li>If noise is not an issue, check for excessive collisions. If there are collisions or late collisions, verify the duplex settings on both ends of the connection. Much like the speed setting, the duplex setting is usually autonegotiated. If there does appear to be a duplex mismatch, manually set the duplex to full on both ends of the connection.</li>
-                    </ul>
-                    <h1>Secure Remote Access</h1>
-                    <h2>Telnet Operation</h2>
-                    <p>You might not always have direct access to your switch when you need to configure it. You need to be able to access it remotely and it is imperative that your access is secure. This topic discusses how to configure Secure Shell (SSH) for remote access. A Packet Tracer activity gives you the opportunity to try this yourself.
-
-                        <br> <br> Telnet uses TCP port 23. It is an older protocol that uses unsecure plaintext transmission of both the login authentication (username and password) and the data transmitted between the communicating devices. A threat actor can monitor packets using Wireshark. For example, in the figure the threat actor captured the username admin and password ccna from a Telnet session.</p>
-                    <img src="https://contenthub.netacad.com/courses/srwe-dl/af9ea780-34fe-11eb-b1b2-9b1b0c1f7e0d/afb58ae5-34fe-11eb-b1b2-9b1b0c1f7e0d/assets/c9642ff0-1c27-11ea-af09-3b2e6521927c.png" alt="">
-                    <h2>SSH Operation</h2>
-                    <p>Secure Shell (SSH) is a secure protocol that uses TCP port 22. It provides a secure (encrypted) management connection to a remote device. SSH should replace Telnet for management connections. SSH provides security for remote connections by providing strong encryption when a device is authenticated (username and password) and also for the transmitted data between the communicating devices.
-
-                    <br><br>For example, the figure shows a Wireshark capture of an SSH session. The threat actor can track the session using the IP address of the administrator device. However, unlike Telnet, with SSH the username and password are encrypted.</p>
-                    
-                    <img src="https://contenthub.netacad.com/courses/srwe-dl/af9ea780-34fe-11eb-b1b2-9b1b0c1f7e0d/afb58ae5-34fe-11eb-b1b2-9b1b0c1f7e0d/assets/c964a522-1c27-11ea-af09-3b2e6521927c.png" alt="">
-                    <h2>Verify the Switch Supports SSH</h2>
-                    <p>To enable SSH on a Catalyst 2960 switch, the switch must be using a version of the IOS software including cryptographic (encrypted) features and capabilities. Use the show version command on the switch to see which IOS the switch is currently running. An IOS filename that includes the combination “k9” supports cryptographic (encrypted) features and capabilities. The example shows the output of the show version command.</p>
-                    <h4>S1# show version
-                        <br>Cisco IOS Software, C2960 Software (C2960-LANBASEK9-M), Version 15.0(2)SE7, RELEASE SOFTWARE (fc1)</h4>
-                    <h2>Configure SSH</h2>
-                    <p>Before configuring SSH, the switch must be minimally configured with a unique hostname and the correct network connectivity settings.</p>
-                    <div style="display: flex; gap: 10px;">
-                        <button type="button" onclick="configureSSH(1)">Step 1</button>
-                        <button type="button" onclick="configureSSH(2)">Step 2</button>
-                        <button type="button" onclick="configureSSH(3)">Step 3</button>
-                        <button type="button" onclick="configureSSH(4)">Step 4</button>
-                        <button type="button" onclick="configureSSH(5)">Step 5</button>
-                        <button type="button" onclick="configureSSH(6)">Step 6</button>
-                    </div>
-                    <p class="subcontent" id="ssh"></p>
-                    <h2>Verify SSH is Operational</h2>
-                    <p>On a PC, an SSH client such as PuTTY, is used to connect to an SSH server. For example, assume the following is configured:</p>
-                    <ul>
-                        <li>SSH is enabled on switch S1</li>
-                        <li>Interface VLAN 99 (SVI) with IPv4 address 172.17.99.11 on switch S1</li>
-                        <li>PC1 with IPv4 address 172.17.99.21</li>
-                    </ul>
-                    <p>The figure shows the PuTTY settings for PC1 to initiate an SSH connection to the SVI VLAN IPv4 address of S1.</p>
-                    <img src="https://contenthub.netacad.com/courses/srwe-dl/af9ea780-34fe-11eb-b1b2-9b1b0c1f7e0d/afb58ae5-34fe-11eb-b1b2-9b1b0c1f7e0d/assets/c96875b0-1c27-11ea-af09-3b2e6521927c.png" alt="">
-                    <p>When connected, the user is prompted for a username and password as shown in the example. Using the configuration from the previous example, the username admin and password ccna are entered. After entering the correct combination, the user is connected via SSH to the command line interface (CLI) on the Catalyst 2960 switch.</p>
-                    <h4>Login as: admin
-                        <br>Using keyboard-interactive
-                        <br>Authentication.
-                        <br>Password:
-                        <br>S1> enable
-                        <br>Password: 
-                        <br>S1#</h4>
-                    <p>To display the version and configuration data for SSH on the device that you configured as an SSH server, use the show ip ssh command. In the example, SSH version 2 is enabled.</p>
-                    <h4>
-                        S1# show ip ssh
-                        <br>SSH Enabled - version 2.0
-                        <br>Authentication timeout: 120 secs; Authentication retries: 3
-                        <br>To check the SSH connections to the device, use the show ssh command as shown.
-                        <br>S1# show ssh
-                        <br>%No SSHv1 server connections running.
-                        <br>Connection Version Mode Encryption  Hmac                State          Username
-                        <br>0          2.0     IN   aes256-cbc  hmac-sha1    Session started       admin
-                        <br>0          2.0     OUT  aes256-cbc  hmac-sha1    Session started       admin
-                        <br>S1#
-                    </h4>
-                    <h1>Basic Router Configuration</h1>
-                    <h2>Configure Basic Router Settings</h2>
-                    <p>Up to now, this module has only covered switches. If you want devices to be able to send and receive data outside of your network, you will have to configure routers. This topic teaches you basic router configuration and provides two Syntax Checkers and a Packet Tracer activity so you can practice these skills. <br>
-                        Cisco routers and Cisco switches have many similarities. They support a similar modal operating system, similar command structures, and many of the same commands. In addition, both devices have similar initial configuration steps. For example, the following configuration tasks should always be performed. Name the device to distinguish it from other routers and configure passwords, as shown in the example.</p>
-                    <h4>Router# configure terminal
-                        <br>Enter configuration commands, one per line.  End with CNTL/Z.
-                        <br>Router(config)# hostname R1
-                        <br>R1(config)# enable secret class
-                        <br>R1(config)# line console 0
-                        <br>R1(config-line)# password cisco
-                        <br>R1(config-line)# login
-                        <br>R1(config-line)# exit
-                        <br>R1(config)# line vty 0 4
-                        <br>R1(config-line)# password cisco
-                        <br>R1(config-line)# login
-                        <br>R1(config-line)# exit
-                        <br>R1(config)# service password-encryption
-                        <br>R1(config)#</h4>
-                    <p>Configure a banner to provide legal notification of unauthorized access, as shown in the example.</p>
-                    <h4>R1(config)# banner motd #Authorized Access Only!#
-                        <br>R1(config)#</h4>
-                    <p>Save the changes on a router, as shown in the example.</p>
-                    <h4>R1# copy running-config startup-config
-                        <br>Destination filename [startup-config]? 
-                        <br>Building configuration...
-                        <br>[OK]</h4>
-                    <h2>Dual Stack Topology</h2>
-                    <p>One distinguishing feature between switches and routers is the type of interfaces supported by each. For example, Layer 2 switches support LANs; therefore, they have multiple FastEthernet or Gigabit Ethernet ports. The dual stack topology in the figure is used to demonstrate the configuration of router IPv4 and IPv6 interfaces.
-
-                        dual stack network topology consisting of multiple hosts, switches, and routers with interfaces configured with both IPv4 and IPv6 addresses
-                        
-                        </p>
-                    <img src="https://i.pinimg.com/1200x/05/c5/97/05c5974e3ee0f745d9970165609ab062.jpg" alt="">
-                    <h2>Configure Router Interfaces</h2>
-                    <p>Routers support LANs and WANs and can interconnect different types of networks; therefore, they support many types of interfaces. For example, G2 ISRs have one or two integrated Gigabit Ethernet interfaces and High-Speed WAN Interface Card (HWIC) slots to accommodate other types of network interfaces, including serial, DSL, and cable interfaces.
-
-                      <br>  To be available, an interface must be:</p>
-                      <ul>
-                        <li>Configured with at least one IP address - Use the ip address ip-address subnet-mask and the ipv6 address ipv6-address/prefix interface configuration commands.</li>
-                        <li>Activated - By default, LAN and WAN interfaces are not activated (shutdown). To enable an interface, it must be activated using the no shutdown command. (This is similar to powering on the interface.) The interface must also be connected to another device (a hub, a switch, or another router) for the physical layer to be active. </li>
-                        <li>Description - Optionally, the interface could also be configured with a short description of up to 240 characters. It is good practice to configure a description on each interface. On production networks, the benefits of interface descriptions are quickly realized as they are helpful in troubleshooting and in identifying a third-party connection and contact information.</li>
-                      </ul>
-                      <p>The following example shows the configuration for the interfaces on R1.</p>
-                      <h4>
-                        R1(config)# interface gigabitethernet 0/0/0
-                        <br>R1(config-if)# ip address 192.168.10.1 255.255.255.0 
-                        <br>R1(config-if)# ipv6 address 2001:db8:acad:1::1/64 
-                        <br>R1(config-if)# description Link to LAN 1
-                        <br>R1(config-if)# no shutdown
-                        <br>R1(config-if)# exit
-                        <br>R1(config)# interface gigabitethernet 0/0/1
-                        <br>R1(config-if)# ip address 192.168.11.1 255.255.255.0 
-                        <br>R1(config-if)# ipv6 address 2001:db8:acad:2::1/64 
-                        <br>R1(config-if)# description Link to LAN 2
-                        <br>R1(config-if)# no shutdown
-                        <br>R1(config-if)# exit
-                        <br>R1(config)# interface serial 0/0/0
-                        <br>R1(config-if)# ip address 209.165.200.225 255.255.255.252 
-                        <br>R1(config-if)# ipv6 address 2001:db8:acad:3::225/64 
-                        <br>R1(config-if)# description Link to R2
-                        <br>R1(config-if)# no shutdown
-                        <br>R1(config-if)# exit
-                        <br>R1(config)#
-                      </h4>
-                      <h2>IPv4 Loopback Interfaces</h2>
-                      <p>Another common configuration of Cisco IOS routers is enabling a loopback interface.
-
-                        <br><br>The loopback interface is a logical interface that is internal to the router. It is not assigned to a physical port and can never be connected to any other device. It is considered a software interface that is automatically placed in an “up” state, as long as the router is functioning.
-                        
-                        <br><br>The loopback interface is useful in testing and managing a Cisco IOS device because it ensures that at least one interface will always be available. For example, it can be used for testing purposes, such as testing internal routing processes, by emulating networks behind the router.
-                        
-                        <br><br>Loopback interfaces are also commonly used in lab environments to create additional interfaces. For example, you can create multiple loopback interfaces on a router to simulate more networks for configuration practice and testing purposes. In this curriculum, we often use a loopback interface to simulate a link to the internet.
-                        
-                        <br><br>Enabling and assigning a loopback address is simple:</p>
-                        <h4>Router(config)# interface loopback number </h4>
-                        <h4>Router(config-if)# ip address ip-address subnet-mask </h4>
-                        <p>Multiple loopback interfaces can be enabled on a router. The IPv4 address for each loopback interface must be unique and unused by any other interface, as shown in the example configuration of loopback interface 0 on R1.</p>
-                        <h4>R1(config)# interface loopback 0
-                            <br>R1(config-if)# ip address 10.0.0.1 255.255.255.0
-                            <br>R1(config-if)# exit
-                            <br>R1(config)#
-                            <br>%LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback0, changed state to up</h4>
-                        <h1>Verify Directly Connected Networks</h1>
-                        <h2>Interface Verification Commands</h2>
-                        <p>There is no point in configuring your router unless you verify the configuration and connectivity. This topic covers the commands to use to verify directly connected networks. It includes two Syntax Checkers and a Packet Tracer.
-
-                            <br>There are several show commands that can be used to verify the operation and configuration of an interface. The topology in the figure is used to demonstrate the verification of router interface settings.
-                            
-                            </p>
-                        <img src="https://i.pinimg.com/736x/2c/be/a0/2cbea00a35c6a26b70d3cadacd4e9284.jpg" alt="">
-                        <p>The following commands are especially useful to quickly identify the status of an interface:</p>
-                        <ul>
-                            <li>show ip interface brief and show ipv6 interface brief - These display a summary for all interfaces including the IPv4 or IPv6 address of the interface and current operational status.</li>
-                            <li>show running-config interface interface-id - This displays the commands applied to the specified interface. </li>
-                            <li>show ip route and show ipv6 route - These display the contents of the IPv4 or IPv6 routing table stored in RAM. In Cisco IOS 15, active interfaces should appear in the routing table with two related entries identified by the code ‘C’ (Connected) or ‘L’ (Local). In previous IOS versions, only a single entry with the code ‘C’ will appear.</li>
-                        </ul>
-                        <h2>Verify Interface Status</h2>
-                        <p>The output of the show ip interface brief and show ipv6 interface brief commands can be used to quickly reveal the status of all interfaces on the router. You can verify that the interfaces are active and operational as indicated by the Status of “up” and Protocol of “up”, as shown in the example. A different output would indicate a problem with either the configuration or the cabling.</p>
-                        <h4>
-                            R1# show ip interface brief
-                            <br>Interface              IP-Address      OK? Method Status                Protocol
-                            <br>GigabitEthernet0/0/0   192.168.10.1    YES manual up                    up
-                            <br>GigabitEthernet0/0/1   192.168.11.1    YES manual up                    up
-                            <br>Serial0/1/0            209.165.200.225 YES manual up                    up
-                            <br>Serial0/1/1            unassigned      YES unset  administratively down down
-                            <br>R1# show ipv6 interface brief
-                            <br>GigabitEthernet0/0/0   [up/up]
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FE80::7279:B3FF:FE92:3130
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2001:DB8:ACAD:1::1
-                            <br>GigabitEthernet0/0/1   [up/up]
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FE80::7279:B3FF:FE92:3131
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2001:DB8:ACAD:2::1
-                            <br>Serial0/1/0            [up/up]
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FE80::7279:B3FF:FE92:3130
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2001:DB8:ACAD:3::1
-                            <br>Serial0/1/1            [down/down]     Unassigned
-                        </h4>
-                        <h2>Verify IPv6 Link Local and Multicast Addresses</h2>
-                        <p>The output of the show ipv6 interface brief command displays two configured IPv6 addresses per interface. One address is the IPv6 global unicast address that was manually entered. The other address, which begins with FE80, is the link-local unicast address for the interface. A link-local address is automatically added to an interface whenever a global unicast address is assigned. An IPv6 network interface is required to have a link-local address, but not necessarily a global unicast address.
-
-                            <br>The show ipv6 interface gigabitethernet 0/0/0 command displays the interface status and all of the IPv6 addresses belonging to the interface. Along with the link local address and global unicast address, the output includes the multicast addresses assigned to the interface, beginning with prefix FF02, as shown in the example.</p>
-                        <h4>
-                            R1# show ipv6 interface gigabitethernet 0/0/0
-                        <br>GigabitEthernet0/0/0 is up, line protocol is up
-                              <br>&nbsp;&nbsp;IPv6 is enabled, link-local address is FE80::7279:B3FF:FE92:3130
-                              <br>&nbsp;&nbsp;No Virtual link-local address(es):
-                              <br>&nbsp;&nbsp;Global unicast address(es):
-                              <br>&nbsp;&nbsp;&nbsp;&nbsp;2001:DB8:ACAD:1::1, subnet is 2001:DB8:ACAD:1::/64
-                              <br>&nbsp;&nbsp;Joined group address(es):
-                              <br>&nbsp;&nbsp;&nbsp;&nbsp;FF02::1
-                              <br>&nbsp;&nbsp;&nbsp;&nbsp; FF02::1:FF00:1
-                              <br>&nbsp;&nbsp;&nbsp;&nbsp;FF02::1:FF92:3130
-                              <br>&nbsp;&nbsp;MTU is 1500 bytes
-                              <br>&nbsp;&nbsp;ICMP error messages limited to one every 100 milliseconds
-                              <br>&nbsp;&nbsp;ICMP redirects are enabled
-                              <br>&nbsp;&nbsp;ICMP unreachables are sent
-                              <br>&nbsp;&nbsp;ND DAD is enabled, number of DAD attempts: 1
-                              <br>&nbsp;&nbsp;ND reachable time is 30000 milliseconds (using 30000)
-                              <br>&nbsp;&nbsp;ND advertised reachable time is 0 (unspecified)
-                              <br>&nbsp;&nbsp;ND advertised retransmit interval is 0 (unspecified)
-                              <br>&nbsp;&nbsp;ND router advertisements are sent every 200 seconds
-                              <br>&nbsp;&nbsp;ND router advertisements live for 1800 seconds
-                              <br>&nbsp;&nbsp;ND advertised default router preference is Medium
-                            </h4>
-                            <h2>Verify Interface Configuration</h2>
-                            <p>The output of the show running-config interface command displays the current commands applied to the specified interface as shown.</p>
-                            <h4>
-                                R1 show running-config interface gigabitethernet 0/0/0
-                                <br>Building configuration...
-                                <br>Current configuration : 158 bytes
-                                <br>!
-                                <br>interface GigabitEthernet0/0/0
-                                <br>&nbsp;&nbsp;description Link to LAN 1
-                                <br>&nbsp;&nbsp;ip address 192.168.10.1 255.255.255.0
-                                <br>&nbsp;&nbsp;negotiation auto
-                                <br>&nbsp;&nbsp;ipv6 address 2001:DB8:ACAD:1::1/64
-                                <br>end
-                                <br>R1#
-                            </h4>
-                            <p>The following two commands are used to gather more detailed interface information:</p>
-                            <ul>
-                                <li>show interfaces- Displays interface information and packet flow count for all interfaces on the device.</li>
-                                <li>show ip interface and show ipv6 interface - Displays the IPv4 and IPv6 related information for all interfaces on a router.</li>
-                            </ul>
-                            <h2>Verify Routes</h2>
-                            <p>The output of the show ip route and show ipv6 route commands reveal the three directly connected network entries and the three local host route interface entries, as shown in the example. The local host route has an administrative distance of 0. It also has a /32 mask for IPv4, and a /128 mask for IPv6. The local host route is for routes on the router that owns the IP address. It is used to allow the router to process packets destined to that IP.</p>
-                            <h4>
-                                R1# show ip route
-                                <br>Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
-                                    
-                                <br><br>Gateway of last resort is not set
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;192.168.10.0/24 is variably subnetted, 2 subnets, 2 masks
-                                <br>C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.10.0/24 is directly connected, GigabitEthernet0/0/0
-                                <br>L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.10.1/32 is directly connected, GigabitEthernet0/0/0
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;192.168.11.0/24 is variably subnetted, 2 subnets, 2 masks
-                                <br>C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.11.0/24 is directly connected, GigabitEthernet0/0/1
-                                <br>L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.11.1/32 is directly connected, GigabitEthernet0/0/1
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;209.165.200.0/24 is variably subnetted, 2 subnets, 2 masks
-                                <br>C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;209.165.200.224/30 is directly connected, Serial0/1/0
-                                <br>L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;209.165.200.225/32 is directly connected, Serial0/1/0
-                                <br>R1# show ipv6 route
-                                <br>IPv6 Routing Table - default - 7 entries
-                                <br>Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
-                                    
-                                <br>C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2001:DB8:ACAD:1::/64 [0/0]
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;via GigabitEthernet0/0/0, directly connected
-                                <br>L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2001:DB8:ACAD:1::1/128 [0/0]
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;via GigabitEthernet0/0/0, receive
-                                <br>C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2001:DB8:ACAD:2::/64 [0/0]
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;via GigabitEthernet0/0/1, directly connected
-                                <br>L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2001:DB8:ACAD:2::1/128 [0/0]
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;via GigabitEthernet0/0/1, receive
-                                <br>C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2001:DB8:ACAD:3::/64 [0/0]
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;via Serial0/1/0, directly connected
-                                <br>L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2001:DB8:ACAD:3::1/128 [0/0]
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;via Serial0/1/0, receive
-                                <br>L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FF00::/8 [0/0]
-                                <br>&nbsp;&nbsp;&nbsp;&nbsp;via Null0, receive
-                                <br>R1#
-                            </h4>
-                            <p>A ‘C’ next to a route within the routing table indicates that this is a directly connected network. When the router interface is configured with a global unicast address and is in the “up/up” state, the IPv6 prefix and prefix length are added to the IPv6 routing table as a connected route.
-
-                                <br>The IPv6 global unicast address applied to the interface is also installed in the routing table as a local route. The local route has a /128 prefix. Local routes are used by the routing table to efficiently process packets with the interface address of the router as the destination.
-                                
-                                <br>The ping command for IPv6 is identical to the command used with IPv4 except that an IPv6 address is used. As shown in the example, the ping command is used to verify Layer 3 connectivity between R1 and PC1.</p>
-                            <h4>R1# ping 2001:db8:acad:1::10
-                                <br>Type escape sequence to abort.
-                                <br>Sending 5, 100-byte ICMP Echos to 2001:DB8:ACAD:1::10, timeout is 2 seconds:
-                                <br>!!!!!
-                                <br>Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms</h4>
-                            <h2>Filter Show Command Output</h2>
-                            <p>Commands that generate multiple screens of output are, by default, paused after 24 lines. At the end of the paused output, the --More-- text displays. Pressing Enter displays the next line and pressing the spacebar displays the next set of lines. Use the terminal length command to specify the number of lines to be displayed. A value of 0 (zero) prevents the router from pausing between screens of output.
-                               <br><br> Another very useful feature that improves the user experience in the CLI is the filtering of show output. Filtering commands can be used to display specific sections of output. To enable the filtering command, enter a pipe (|) character after the show command and then enter a filtering parameter and a filtering expression.
-                               <br><br> There are four filtering parameters that can be configured after the pipe.</p>
-                            <div style="display: flex; gap: 10px;">
-                                <button type="button" onclick="filterShow(1)">section</button>
-                                <button type="button" onclick="filterShow(2)">include</button>
-                                <button type="button" onclick="filterShow(3)">exclude</button>
-                                <button type="button" onclick="filterShow(4)">begin</button>
-                            </div>
-                            <p class="subcontent" id="filter"></p>
-                            <h2>Command History Feature</h2>
-                            <p>The command history feature is useful because it temporarily stores the list of executed commands to be recalled.
-
-                                <br><br>To recall commands in the history buffer, press Ctrl+P or the Up Arrow key. The command output begins with the most recent command. Repeat the key sequence to recall successively older commands. To return to more recent commands in the history buffer, press Ctrl+N or the Down Arrow key. Repeat the key sequence to recall successively more recent commands.
-                                
-                                <br><br>By default, command history is enabled and the system captures the last 10 command lines in its history buffer. Use the show history privileged EXEC command to display the contents of the buffer.
-                                
-                                <br><br>It is also practical to increase the number of command lines that the history buffer records during the current terminal session only. Use the terminal history size user EXEC command to increase or decrease the size of the buffer.
-                                
-                                <br><br>An example of the terminal history size and show history commands is shown in the figure.</p>
-                            <h4>
-                                R1# terminal history size 200
-                                <br>R1# show history
-                                <br>&nbsp;&nbsp;show ip int brief
-                                <br>&nbsp;&nbsp;show interface g0/0/0
-                                <br>&nbsp;&nbsp;show ip route
-                                <br>&nbsp;&nbsp;show running-config
-                                <br>&nbsp;&nbsp;show history
-                                <br>&nbsp;&nbsp;terminal history size 200
-                            </h4>
-                        </div>
             </div>
-
+            <div class="menu-item">
+                <div class="menu-header" onclick="content(2)">
+                    <span >2. Switching Concepts</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header" onclick="content(3)">
+                    <span >3. VLANs</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>4. Inter-VLAN Routing</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>5. STP Concepts</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>6. EtherChannel</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>7. DHCPv4</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>8. SLAAC and DHCPv6</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>9. RHRP Concepts</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>10. LAN Security Concepts</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>11. Switch Security Configuration</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>12. WLAN Concepts</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>13. WLAN Configuration</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>14. Routing Concepts</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>15. IP Static Routing</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>16. Troubleshoot Static and Default Routes</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="content">
+        
+    </div>
+    <!-- Scripts -->
     <script src="module2.js"></script>
 </body>
 </html>

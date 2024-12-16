@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgb(255, 255, 255);
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: Arial;
 }
 h1 {
     color: rgb(38, 145, 56);
@@ -20,13 +20,17 @@ h4 {
     border-radius: 10px;
     color: white;
 }
+pre {
+    padding: 10px 20px;
+    background-color: #1d1d1d;
+    border-radius: 10px;
+    color: white;
+}
 h3 {
     padding: 10px 20px;
 }
 p {
     padding: 10px 20px;
-    background-color: #e2f2ea;
-    border-radius: 10px;
 }
 .header {
     display: flex;
@@ -162,7 +166,7 @@ p {
     font-family: 'Times New Roman', Times, serif;
 }
 .content button {
-    width: 120px;
+    width: 200px;
     font-size: 18px;
     padding: 10px 20px;
     border-radius: 10px;
@@ -185,8 +189,13 @@ p {
 .content.shift {
     margin-left: 300px; /* Dịch nội dung sang phải khi mở sidebar */
 }
-td, th {
-    border: 0.55px solid #040000;
+td {
+    border: 0px solid #d0d0d0;
+    background-color: #e3d7d7;
     text-align: left;
     padding: 8px;
+
+}
+th {
+    background-color: #acadaf;
 }
