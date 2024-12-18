@@ -52,6 +52,224 @@ function vlan(number) {
             In the figure, VLAN 150 is designed to carry voice traffic. The student computer PC5 is attached to the Cisco IP phone, and the phone is attached to switch S3. PC5 is in VLAN 20, which is used for student data.
         </p>
         <img src="https://i.pinimg.com/736x/eb/b7/10/ebb710abdd52dd8e34c861879fe1984a.jpg" alt="">`,
+    6: `<h3>1. Create and name the VLANs.</h3>
+        <p>
+            First, the VLANs are created and named. VLANs are only created after you exit out of VLAN subconfiguration mode.
+        </p>
+        <pre>S1(config)# vlan 10
+S1(config-vlan)# name LAN10
+S1(config-vlan)# exit
+S1(config)# vlan 20
+S1(config-vlan)# name LAN20
+S1(config-vlan)# exit
+S1(config)# vlan 99
+S1(config-vlan)# name Management
+S1(config-vlan)# exit
+S1(config)#</pre>
+`,
+    7: ` <h3>2. Create the management interface.</h3>
+        <p>Next, the management interface is created on VLAN 99 along with the default gateway of R1.</p>
+        <pre>S1(config)# interface vlan 99
+S1(config-if)# ip add 192.168.99.2 255.255.255.0
+S1(config-if)# no shut
+S1(config-if)# exit
+S1(config)# ip default-gateway 192.168.99.1
+S1(config)#</pre>`,
+    8: `<h3>3. Configure access ports.</h3>
+        <p>
+            Next, port Fa0/6 connecting to PC1 is configured as an access port in VLAN 10. Assume PC1 has been configured with the correct IP address and default gateway.
+        </p>
+        <pre>S1(config)# interface fa0/6
+S1(config-if)# switchport mode access
+S1(config-if)# switchport access vlan 10
+S1(config-if)# no shut
+S1(config-if)# exit
+S1(config)#</pre>`,
+    9: `<h3>4. Configure trunking ports.</h3>
+        <p>Finally, ports Fa0/1 connecting to S2 and Fa05 connecting to R1 are configured as trunk ports.</p>
+        <pre>S1(config)# interface fa0/1
+S1(config-if)# switchport mode trunk
+S1(config-if)# no shut
+S1(config-if)# exit
+S1(config)# interface fa0/5
+S1(config-if)# switchport mode trunk
+S1(config-if)# no shut
+S1(config-if)# end
+*Mar  1 00:23:43.093: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+*Mar  1 00:23:44.511: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/5, changed state to up</pre>`,
+    10: `<p>
+            Verify that the subinterfaces are appearing in the routing table of R1 by using the show ip route command. Notice that there are three connected routes (C) and their respective exit interfaces for each routable VLAN. The output confirms that the correct subnets, VLANs, and subinterfaces are active.
+        </p>
+        <pre>R1# show ip route | begin Gateway
+Gateway of last resort is not set
+      192.168.10.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.10.0/24 is directly connected, GigabitEthernet0/0/1.10
+L        192.168.10.1/32 is directly connected, GigabitEthernet0/0/1.10
+      192.168.20.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.20.0/24 is directly connected, GigabitEthernet0/0/1.20
+L        192.168.20.1/32 is directly connected, GigabitEthernet0/0/1.20
+      192.168.99.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.99.0/24 is directly connected, GigabitEthernet0/0/1.99
+L        192.168.99.1/32 is directly connected, GigabitEthernet0/0/1.99
+R1# </pre>`,
+    11: `<p>
+            Another useful router command is <b>show ip interface brief</b>, as shown in the output. The output confirms that the subinterfaces have the correct IPv4 address configured, and that they are operational.
+        </p>
+        <pre>R1# show ip interface brief | include up
+GigabitEthernet0/0/1   unassigned      YES unset  up                    up
+Gi0/0/1.10             192.168.10.1    YES manual up                    up
+Gi0/0/1.20             192.168.20.1    YES manual up                    up
+Gi0/0/1.99             192.168.99.1    YES manual up                    up
+R1#</pre>`,
+    12: `<p>Subinterfaces can be verified using the show interfaces subinterface-id command, as shown.</p>
+        <pre>R1# show interfaces g0/0/1.10
+GigabitEthernet0/0/1.10 is up, line protocol is up
+  Hardware is ISR4221-2x1GE, address is 10b3.d605.0301 (bia 10b3.d605.0301)
+  Description: Default Gateway for VLAN 10
+  Internet address is 192.168.10.1/24
+  MTU 1500 bytes, BW 100000 Kbit/sec, DLY 100 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation 802.1Q Virtual LAN, Vlan ID  10.
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Keepalive not supported
+  Last clearing of "show interface" counters never
+R1#</pre>`,
+    13: `<p>
+            The misconfiguration could also be on the trunking port of the switch. Therefore, it is also useful to verify the active trunk links on a Layer 2 switch by using the <b>show interfaces trunk </b>command, as shown in the output. The output confirms that the link to R1 is trunking for the required VLANs.
+           <br><br> <b>Note:</b> Although VLAN 1 was not explicitly configured, it was automatically included because control traffic on trunk links will always be forwarded on VLAN 1.
+        </p>
+        <pre>S1# show interfaces trunk
+Port        Mode             Encapsulation  Status        Native vlan
+Fa0/1       on               802.1q         trunking      1
+Fa0/5       on               802.1q         trunking      1
+Port        Vlans allowed on trunk
+Fa0/1       1-4094
+Fa0/5       1-4094
+Port        Vlans allowed and active in management domain
+Fa0/1       1,10,20,99
+Fa0/5       1,10,20,99
+Port        Vlans in spanning tree forwarding state and not pruned
+Fa0/1       1,10,20,99
+Fa0/5       1,10,20,99
+S1#</pre>`,
+    14: `        <h3>1. Create the VLANs.</h3>
+        <p>
+            First, create the two VLANs as shown in the output.
+        </p>
+        <pre>D1(config)# vlan 10
+D1(config-vlan)# name LAN10
+D1(config-vlan)# vlan 20
+D1(config-vlan)# name LAN20
+D1(config-vlan)# exit
+D1(config)#</pre>`,
+    15: `<h3>2. Create the SVI VLAN interfaces</h3>
+        <p>Configure the SVI for VLANs 10 and 20. The IP addresses that are configured will serve as the default gateways to the hosts in the respective VLANs. Notice the informational messages showing the line protocol on both SVIs changed to up.</p>
+        <pre>D1(config)# interface vlan 10
+D1(config-if)# description Default Gateway SVI for 192.168.10.0/24
+D1(config-if)# ip add 192.168.10.1 255.255.255.0
+D1(config-if)# no shut
+D1(config-if)# exit
+D1(config)#
+D1(config)# int vlan 20
+D1(config-if)# description Default Gateway SVI for 192.168.20.0/24
+D1(config-if)# ip add 192.168.20.1 255.255.255.0
+D1(config-if)# no shut
+D1(config-if)# exit
+D1(config)#
+*Sep 17 13:52:16.053: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan10, changed state to up
+*Sep 17 13:52:16.160: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan20, changed state to up</pre>`,
+    16: `<h3>3. Configure access ports.</h3>
+        <p>Next, configure the access ports connecting to the hosts and assign them to their respective VLANs.</p>
+        <pre>D1(config)# interface GigabitEthernet1/0/6
+D1(config-if)# description Access port to PC1
+D1(config-if)# switchport mode access
+D1(config-if)# switchport access vlan 10
+D1(config-if)# exit
+D1(config)#
+D1(config)# interface GigabitEthernet1/0/18
+D1(config-if)# description Access port to PC2
+D1(config-if)# switchport mode access
+D1(config-if)# switchport access vlan 20
+D1(config-if)# exit</pre>`,
+    17: `<h3>4. Enable IP routing.</h3>
+        <p>Finally, enable IPv4 routing with the ip routing global configuration command to allow traffic to be exchanged between VLANs 10 and 20. This command must be configured to enable inter-VAN routing on a Layer 3 switch for IPv4.</p>
+        <pre>D1(config)# ip routing
+D1(config)#</pre>`,
+    18: `<p>
+            <b>1. Configure the routed port.</b>
+            <br><br>
+            Configure G0/0/1 to be a routed port, assign it an IPv4 address, and enable it.
+        </p>
+        <pre>D1(config)# interface GigabitEthernet0/0/1
+D1(config-if)# description routed Port Link to R1
+D1(config-if)# no switchport
+D1(config-if)# ip address 10.10.10.2 255.255.255.0
+D1(config-if)# no shut
+D1(config-if)# exit
+D1(config)#</pre>`,
+    19: ` <p>
+            <b>2. Enable routing</b>
+            <br>Ensure IPv4 routing is enabled with the ip routing global configuration command.
+        </p>
+        <pre>D1(config)# ip routing
+D1(config)#</pre>`,
+    20: `<p>
+           <b> 3. Configure routing.</b>
+            <br>Configure the OSPF routing protocol to advertise the VLAN 10 and VLAN 20 networks, along with the network that is connected to R1. Notice the message informing you that an adjacency has been established with R1.
+        </p>
+        <pre>D1(config)# router ospf 10
+D1(config-router)# network 192.168.10.0 0.0.0.255 area 0
+D1(config-router)# network 192.168.20.0 0.0.0.255 area 0
+D1(config-router)# network 10.10.10.0 0.0.0.3 area 0
+D1(config-router)# ^Z
+D1#
+*Sep 17 13:52:51.163: %OSPF-5-ADJCHG: Process 10, Nbr 10.20.20.1 on GigabitEthernet0/0/1 from LOADING to FULL, Loading Done
+D1#</pre>`,
+    21: `<p>
+            <b>4. Verify routing.
+                </b>
+                <br>Verify the routing table on D1. Notice that D1 now has a route to the 10.20.20.0/24 network.
+        </p>
+        <pre>D1# show ip route | begin Gateway
+Gateway of last resort is not set
+      10.0.0.0/8 is variably subnetted, 3 subnets, 3 masks
+C        10.10.10.0/30 is directly connected, GigabitEthernet0/0/1
+L        10.10.10.2/32 is directly connected, GigabitEthernet0/0/1
+O        10.10.20.0/24 [110/2] via 10.10.10.1, 00:00:06, GigabitEthernet0/0/1
+      192.168.10.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.10.0/24 is directly connected, Vlan10
+L        192.168.10.1/32 is directly connected, Vlan10
+      192.168.20.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.20.0/24 is directly connected, Vlan20
+L        192.168.20.1/32 is directly connected, Vlan20
+D1#</pre>`,
+    22: `<p>
+            <b>5. Verify connectivity.</b>
+            <br>At this time, PC1 and PC2 are able to ping the server connected to R1.
+        </p>
+        <pre>C:\Users\PC1> ping 10.20.20.254
+Pinging 10.20.20.254 with 32 bytes of data: 
+Request timed out.
+Reply from 10.20.20.254: bytes=32 time<1ms TTL=127
+Reply from 10.20.20.254: bytes=32 time<1ms TTL=127
+Reply from 10.20.20.254: bytes=32 time<1ms TTL=127
+Ping statistics for 10.20.20.254:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss).
+Approximate round trip times in milli-seconds: 
+    Minimum = 1ms, Maximum = 2ms, Average = 1ms 
+C:\Users\PC1>
+!==================================================
+C:\Users\PC2> ping 10.20.20.254
+Pinging 10.20.20.254 with 32 bytes of data: 
+Reply from 10.20.20.254: bytes=32 time<1ms TTL=127
+Reply from 10.20.20.254: bytes=32 time<1ms TTL=127
+Reply from 10.20.20.254: bytes=32 time<1ms TTL=127
+Reply from 10.20.20.254: bytes=32 time<1ms TTL=127
+Ping statistics for 10.20.20.254:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss).
+Approximate round trip times in milli-seconds: 
+    Minimum = 1ms, Maximum = 2ms, Average = 1ms
+C:\Users\PC2> </pre>`,
   };
   if (number == 1) {
     document.getElementById('vlan').innerHTML = content[1];
@@ -61,9 +279,43 @@ function vlan(number) {
     document.getElementById('vlan').innerHTML = content[3];
   } else if (number == 4) {
     document.getElementById('vlan').innerHTML = content[4];
-  } else {
+  } else if (number == 5) {
     document.getElementById('vlan').innerHTML = content[5];
-  }
+  } else if (number == 6) {
+    document.getElementById('vlan').innerHTML = content[6];
+  } else if (number == 7) {
+    document.getElementById('vlan').innerHTML = content[7];
+  } else if (number == 8) {
+    document.getElementById('vlan').innerHTML = content[8];
+  } else if (number == 9) {
+    document.getElementById('vlan').innerHTML = content[9];
+  } else if (number == 10) {
+    document.getElementById('vlan-2').innerHTML = content[10];
+  } else if (number == 11) {
+    document.getElementById('vlan-2').innerHTML = content[11];
+  } else if (number == 12) {
+    document.getElementById('vlan-2').innerHTML = content[12];
+  } else if (number == 13) {
+    document.getElementById('vlan-2').innerHTML = content[13];
+  } else if (number == 14) {
+    document.getElementById('vlan-3').innerHTML = content[14];
+  } else if (number == 15) {
+    document.getElementById('vlan-3').innerHTML = content[15];
+  } else if (number == 16) {
+    document.getElementById('vlan-3').innerHTML = content[16];
+  } else if (number == 17) {
+    document.getElementById('vlan-3').innerHTML = content[17];
+  } else if (number == 18) {
+    document.getElementById('vlan-4').innerHTML = content[18];
+  } else if (number == 19) {
+    document.getElementById('vlan-4').innerHTML = content[19];
+  } else if (number == 20) {
+    document.getElementById('vlan-4').innerHTML = content[20];
+  } else if (number == 21) {
+    document.getElementById('vlan-4').innerHTML = content[21];
+  } else if (number == 22) {
+    document.getElementById('vlan-4').innerHTML = content[22];
+  } 
 }
 function showContentByButton(number) {
   const content = {
@@ -208,6 +460,7 @@ function configureSSH (number){
       break;
   }
 }
+
 function filterShow(number) {
   const content = {
     1: `<h3>section</h3>
@@ -1879,6 +2132,822 @@ Enabled: yes
 In STP: no
         </pre>
         <p>Note: A general best practice is to set the interface to trunk and nonegotiate when a trunk link is required. On links where trunking is not intended, DTP should be turned off.</p>`,
+        4: `        <h1>Introduction</h1>
+        <h2>Why should I take this module?</h2>
+        <p>
+            Welcome to Inter-VLAN Routing!
+            <br><br>
+            Now you know how to segment and organize your network into VLANs. Hosts can communicate with other hosts in the same VLAN, and you no longer have hosts sending out broadcast messages to every other device in your network, eating up needed bandwidth. But what if a host in one VLAN needs to communicate with a host in a different VLAN? If you are a network administrator, you know that people will want to communicate with other people outside of your network. This is where inter-VLAN routing can help you. Inter-VLAN routing uses a Layer 3 device such as a router or a Layer 3 switch. Let’s take your VLAN expertise and combine it with your network layer skills and put them to the test!
+        </p>
+        <h2>What will I learn to do in this module?</h2>
+        <p>
+            <b>Module Title:</b> Inter-VLAN Routing
+            <br>
+            <b>Module Objective:</b> Troubleshoot inter-VLAN routing on Layer 3 devices.
+        </p>
+        <table>
+            <tr>
+                <th>Topic Title</th>
+                <th>	Topic Objective</th>
+            </tr>
+            <tr>
+                <td>Inter-VLAN Routing Operation</td>
+                <td>Describe options for configuring inter-VLAN routing.</td>
+            </tr>
+            <tr>
+                <td>Router-on-a-Stick Inter-VLAN Routing</td>
+                <td>Configure router-on-a-stick inter-VLAN routing.</td>
+            </tr>
+            <tr>
+                <td>Inter-VLAN Routing using Layer 3 Switches</td>
+                <td>Configure inter-VLAN routing using Layer 3 switching.</td>
+            </tr>
+            <tr>
+                <td>Troubleshoot Inter-VLAN Routing</td>
+                <td>Troubleshoot common inter-VLAN configuration issues.</td>
+            </tr>
+        </table>
+        <h1>Inter-VLAN Routing Operation</h1>
+        <h2>What is Inter-VLAN Routing?</h2>
+        <p>
+            VLANs are used to segment switched Layer 2 networks for a variety of reasons. Regardless of the reason, hosts in one VLAN cannot communicate with hosts in another VLAN unless there is a router or a Layer 3 switch to provide routing services.
+            <br><br>
+            Inter-VLAN routing is the process of forwarding network traffic from one VLAN to another VLAN.
+            <br><br>
+            There are three inter-VLAN routing options:
+        </p>
+        <li>Legacy Inter-VLAN routing - This is a legacy solution. It does not scale well.</li>
+            <li>Router-on-a-Stick - This is an acceptable solution for a small to medium-sized network.</li>
+            <li>Layer 3 switch using switched virtual interfaces (SVIs) - This is the most scalable solution for medium to large organizations.</li>
+        <h2>Legacy Inter-VLAN Routing</h2>
+        <p>
+            The first inter-VLAN routing solution relied on using a router with multiple Ethernet interfaces. Each router interface was connected to a switch port in different VLANs. The router interfaces served as the default gateways to the local hosts on the VLAN subnet.
+            <br><br>
+            For example, refer to the topology where R1 has two interfaces connected to switch S1.
+            <br><br>
+            The physical network topology shows two PCs, a switch, and a router. PC1 on the left has IP address 192.168.10.10, is in VLAN 10, and is connected the switch on port F0/11. PC2 on the right has IP address 192.168.20.10, is in VLAN 20, and is connected to the switch on portF0/24. The switch, S1, has two links to the router, R1. Switch port F0/1 is connected to interface G0/0/0 on R1. Switch port F0/2 is connected to interface G0/0/1 on R1. Router interface G0/0/0 has IP address 192.168.10.1. Router interface G0/0/1 has IP address 192.168.20.1.
+        </p>
+        <img src="https://i.pinimg.com/736x/0b/51/16/0b5116293f4444ba4f947798b10a0495.jpg" alt="">
+        <p>Notice in the example MAC address table of S1 is populated as follows:</p>
+        <li>Fa0/1 port is assigned to VLAN 10 and is connected to the R1 G0/0/0 interface.</li>
+        <li>Fa0/11 port is assigned to VLAN 10 and is connected to PC1.</li>
+        <li>Fa0/12 port is assigned to VLAN 20 and is connected to the R1 G0/0/1 interface.</li>
+        <li>Fa0/24 port is assigned to VLAN 20 and is connected to PC2.</li>
+        <h2>MAC Address table for S1</h2>
+        <table>
+            <tr>
+                <th>Port</th>
+                <th>MAC Address</th>
+                <th>VLAN</th>
+            </tr>
+            <tr>
+                <td>F0/1</td>
+                <td>R1 G0/0/0 MAC</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>F0/11</td>
+                <td>PC1 MAC</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>F0/12</td>
+                <td>R1 G0/0/1 MAC</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>F0/24</td>
+                <td>PC2 MAC</td>
+                <td>20</td>
+            </tr>
+        </table>
+        <p>
+            When PC1 sends a packet to PC2 on another network, it forwards it to its default gateway 192.168.10.1. R1 receives the packet on its G0/0/0 interface and examines the destination address of the packet. R1 then routes the packet out its G0/0/1 interface to the F0/12 port in VLAN 20 on S1. Finally, S1 forwards the frame to PC2.
+            <br><br>
+            Legacy inter-VLAN routing using physical interfaces works, but it has a significant limitation. It is not reasonably scalable because routers have a limited number of physical interfaces. Requiring one physical router interface per VLAN quickly exhausts the physical interface capacity of a router.
+            <br><br>
+            In our example, R1 required two separate Ethernet interfaces to route between VLAN 10 and VLAN 20. What if there were six (or more) VLANs to interconnect? A separate interface would be required for each VLAN. Obviously, this solution is not scalable.
+            <br><br>
+            <b>Note:</b> This method of inter-VLAN routing is no longer implemented in switched networks and is included for explanation purposes only.
+        </p>
+        <h2>Router-on-a-Stick Inter-VLAN Routing</h2>
+        <p>
+            The ‘router-on-a-stick’ inter-VLAN routing method overcomes the limitation of the legacy inter-VLAN routing method. It only requires one physical Ethernet interface to route traffic between multiple VLANs on a network.
+            <br><br>
+            A Cisco IOS router Ethernet interface is configured as an 802.1Q trunk and connected to a trunk port on a Layer 2 switch. Specifically, the router interface is configured using subinterfaces to identify routable VLANs.
+            <br><br>
+            The configured subinterfaces are software-based virtual interfaces. Each is associated with a single physical Ethernet interface. Subinterfaces are configured in software on a router. Each subinterface is independently configured with an IP address and VLAN assignment. Subinterfaces are configured for different subnets that correspond to their VLAN assignment. This facilitates logical routing.
+            <br><br>
+            When VLAN-tagged traffic enters the router interface, it is forwarded to the VLAN subinterface. After a routing decision is made based on the destination IP network address, the router determines the exit interface for the traffic. If the exit interface is configured as an 802.Q subinterface, the data frames are VLAN-tagged with the new VLAN and sent back out the physical interface.
+        </p>
+        <img id="myImage" src="https://i.pinimg.com/736x/36/7f/ba/367fba4c897990000848b9f5f4f504a8.jpg" alt="Default Image">
+        <br>
+        <div style="display: flex; gap: 209px;">
+            <button onclick="changeImage()">Next >> </button>
+            <p style="padding: 2px 3px; background-color: rgb(183, 141, 141); border-radius: 10px;" id="pages">1</p>
+        </div>
+        <p>
+            As seen in the animation, PC1 on VLAN 10 is communicating with PC3 on VLAN 30. When R1 accepts the tagged unicast traffic on VLAN 10, it routes that traffic to VLAN 30, using its configured subinterfaces. Switch S2 removes the VLAN tag of the unicast frame and forwards the frame out to PC3 on port F0/23.
+            <br><br>
+            <b>Note: </b>The router-on-a-stick method of inter-VLAN routing does not scale beyond 50 VLANs.
+        </p>
+        <h2>Inter-VLAN Routing on a Layer 3 Switch</h2>
+        <p>
+            The modern method of performing inter-VLAN routing is to use Layer 3 switches and switched virtual interfaces (SVI). An SVI is a virtual interface that is configured on a Layer 3 switch, as shown in the figure.
+            <br><br>
+            <b>Note: </b>A Layer 3 switch is also called a multilayer switch as it operates at Layer 2 and Layer 3. However, in this course we use the term Layer 3 switch.
+            <br><br>
+            The physical network topology shows two PCs, two Layer 2 switches, and a Layer 3 switch. The PC on the left is in VLAN 10 and is connected to a Layer 2 switch which in turn is connected to the Layer 3 switch. The PC on the right is in VLAN 20 and is connected to a Layer 2 switch which in turn is connected to the Layer 3 switch. The Layer 3 switch has two SVI interfaces. SVI1 is in VLAN 10 and has IP address 10.1.10.1. SVI2 is in VLAN 20 and has IP address 10.1.20.1.
+        </p>
+        <img src="https://i.pinimg.com/736x/42/53/c8/4253c8713a4eaffb330c4e56b4523df3.jpg" alt="">
+        <p>
+            Inter-VLAN SVIs are created the same way that the management VLAN interface is configured. The SVI is created for a VLAN that exists on the switch. Although virtual, the SVI performs the same functions for the VLAN as a router interface would. Specifically, it provides Layer 3 processing for packets that are sent to or from all switch ports associated with that VLAN.
+            <br><br>
+            The following are advantages of using Layer 3 switches for inter-VLAN routing:
+        </p>                
+        <ul>
+            <li> They are much faster than router-on-a-stick because everything is hardware switched and routed.</li>
+            <li>There is no need for external links from the switch to the router for routing.</li>
+            <li>They are not limited to one link because Layer 2 EtherChannels can be used as trunk links between the switches to increase bandwidth.</li>
+            <li>Latency is much lower because data does not need to leave the switch in order to be routed to a different network.</li>
+            <li>They more commonly deployed in a campus LAN than routers.</li>
+        </ul>
+        <p>The only disadvantage is that Layer 3 switches are more expensive.</p>
+        <h1>Router-on-a-Stick Inter-VLAN Routing</h1>
+        <h2>Router-on-a-Stick Scenario</h2>
+        <p>
+            In the previous topic, three different ways to create inter-VLAN routing were listed, and legacy inter-VLAN routing was detailed. This topic details how to configure router-on-a-stick inter-VLAN routing. You can see in the figure that the router is not in the center of the topology but instead, appears to be on a stick near the border, hence the name.
+            <br><br>
+            In the figure, the R1 GigabitEthernet 0/0/1 interface is connected to the S1 FastEthernet 0/5 port. The S1 FastEthernet 0/1 port is connected to the S2 FastEthernet 0/1 port. These are trunk links that are required to forward traffic within and between VLANs.
+        </p>
+        <img src="https://i.pinimg.com/736x/ce/51/2c/ce512c69b57f63ccd2d877e4258edcf6.jpg" alt="">
+        <p>
+            To route between VLANs, the R1 GigabitEthernet 0/0/1 interface is logically divided into three subinterfaces, as shown in the table. The table also shows the three VLANs that will be configured on the switches.
+        </p>
+        <h3>Router R1 Subinterfaces</h3>
+        <table>
+            <tr>
+                <th>Subinterface</th>
+                <th>VLAN</th>
+                <th>IP Address</th>
+            </tr>
+            <tr>
+                <td>G0/0/1.10</td>
+                <td>10</td>
+                <td>192.168.10.1/24</td>
+            </tr>
+            <tr>
+                <td>G0/0/1.20</td>
+                <td>20</td>
+                <td>192.168.20.1/24</td>
+            </tr>
+            <tr>
+                <td>G0/0/1.99</td>
+                <td>99</td>
+                <td>192.168.99.1/24</td>
+            </tr>
+        </table>
+        <p>
+            Assume that R1, S1, and S2 have initial basic configurations. Currently, PC1 and PC2 cannot ping each other because they are on separate networks. Only S1 and S2 can ping each other, but they but are unreachable by PC1 or PC2 because they are also on different networks.
+            <br><br>
+            To enable devices to ping each other, the switches must be configured with VLANs and trunking, and the router must be configured for inter-VLAN routing.
+        </p>
+        <h2>S1 VLAN and Trunking Configuration</h2>
+        <p>
+            Complete the following steps to configure S1 with VLANs and trunking:
+            <br><br><b>Step 1.</b> Create and name the VLANs.
+            <br><b>Step 2.</b> Create the management interface.
+            <br><b>Step 3.</b> Configure access ports.
+            <br><b>Step 4.</b> Configure trunking ports.
+        </p>
+        <img src="https://i.pinimg.com/736x/6e/84/62/6e84625e7df8e8dbd6f59feb9e960182.jpg" alt="">
+        <div>
+            <button onclick="vlan(6)">1. Create and name the VLANS</button>
+            <button onclick="vlan(7)" style="width: 300px;">2. Create the management interface</button>
+            <button onclick="vlan(8)">3. Configure access ports</button>
+            <button onclick="vlan(9)">4. Configure trunking ports</button>
+        </div>
+        
+        <p id="vlan"></p>
+        <h2>S2 VLAN and Trunking Configuration</h2>
+        <p>
+            The configuration for S2 is similar to S1.
+        </p>
+        <img src="https://i.pinimg.com/736x/e8/d4/ab/e8d4ab474264c804b5440fac4e1098fc.jpg" alt="">
+        <pre>S2(config)# vlan 10
+S2(config-vlan)# name LAN10
+S2(config-vlan)# exit
+S2(config)# vlan 20
+S2(config-vlan)# name LAN20
+S2(config-vlan)# exit
+S2(config)# vlan 99
+S2(config-vlan)# name Management
+S2(config-vlan)# exit
+S2(config)#
+S2(config)# interface vlan 99
+S2(config-if)# ip add 192.168.99.3 255.255.255.0
+S2(config-if)# no shut
+S2(config-if)# exit
+S2(config)# ip default-gateway 192.168.99.1
+S2(config)# interface fa0/18
+S2(config-if)# switchport mode access
+S2(config-if)# switchport access vlan 20
+S2(config-if)# no shut
+S2(config-if)# exit
+S2(config)# interface fa0/1
+S2(config-if)# switchport mode trunk
+S2(config-if)# no shut
+S2(config-if)# exit
+S2(config-if)# end
+*Mar  1 00:23:52.137: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up</pre>
+        <h2>R1 Subinterface Configuration</h2>
+        <p>
+            The router-on-a-stick method requires you to create a subinterface for each VLAN to be routed.
+            <br><br>
+            A subinterface is created using the interface interface_id.subinterface_id global configuration mode command. The subinterface syntax is the physical interface followed by a period and a subinterface number. Although not required, it is customary to match the subinterface number with the VLAN number.
+            <br><br>
+            Each subinterface is then configured with the following two commands:
+        </p>
+        <li>encapsulation dot1q vlan_id [native] - This command configures the subinterface to respond to 802.1Q encapsulated traffic from the specified vlan-id. The native keyword option is only appended to set the native VLAN to something other than VLAN 1.</li>
+        <li>ip address ip-address subnet-mask - This command configures the IPv4 address of the subinterface. This address typically serves as the default gateway for the identified VLAN.</li>
+        <p>
+            Repeat the process for each VLAN to be routed. Each router subinterface must be assigned an IP address on a unique subnet for routing to occur.
+            <br><br>
+            When all subinterfaces have been created, enable the physical interface using the no shutdown interface configuration command. If the physical interface is disabled, all subinterfaces are disabled.
+            <br><br>
+            In the following configuration, the R1 G0/0/1 subinterfaces are configured for VLANs 10, 20, and 99.
+        </p>
+        <img src="https://i.pinimg.com/736x/2f/ae/1c/2fae1c95b8ff8ea3dd2bea0aac82ec8a.jpg" alt="">
+        <pre>
+            R1(config)# interface G0/0/1.10
+R1(config-subif)# description Default Gateway for VLAN 10
+R1(config-subif)# encapsulation dot1Q 10
+R1(config-subif)# ip add 192.168.10.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)#
+R1(config)# interface G0/0/1.20
+R1(config-subif)# description Default Gateway for VLAN 20
+R1(config-subif)# encapsulation dot1Q 20
+R1(config-subif)# ip add 192.168.20.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)#
+R1(config)# interface G0/0/1.99
+R1(config-subif)# description Default Gateway for VLAN 99
+R1(config-subif)# encapsulation dot1Q 99
+R1(config-subif)# ip add 192.168.99.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)#
+R1(config)# interface G0/0/1
+R1(config-if)# description Trunk link to S1
+R1(config-if)# no shut
+R1(config-if)# end
+R1#
+*Sep 15 19:08:47.015: %LINK-3-UPDOWN: Interface GigabitEthernet0/0/1, changed state to down
+*Sep 15 19:08:50.071: %LINK-3-UPDOWN: Interface GigabitEthernet0/0/1, changed state to up
+*Sep 15 19:08:51.071: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/1, changed state to up
+R1#
+        </pre>
+        <h2>Verify Connectivity Between PC1 and PC2</h2>
+        <p>
+            The router-on-a-stick configuration is complete after the switch trunk and the router subinterfaces have been configured. The configuration can be verified from the hosts, router, and switch.
+            <br><br>
+            From a host, verify connectivity to a host in another VLAN using the ping command. It is a good idea to first verify the current host IP configuration using the ipconfig Windows host command.
+        </p>
+        <pre>C:\Users\PC1> ipconfig
+Windows IP Configuration
+Ethernet adapter Ethernet0:
+  Connection-specific DNS Suffix . :
+  Link-local IPv6 Address          : fe80::5c43:ee7c:2959:da68%6
+  IPv4 Address                     : 192.168.10.10
+  Subnet Mask                      : 255.255.255.0
+  Default Gateway                  : 192.168.10.1
+C:\Users\PC1> </pre>
+        <p>
+            The output confirms the IPv4 address and default gateway of PC1. Next, use ping to verify connectivity with PC2 and S1, as shown in the figure. The ping output successfully confirms inter-VLAN routing is operating.
+        </p>
+        <pre>C:\Users\PC1> ping 192.168.20.10
+Pinging 192.168.20.10 with 32 bytes of data:
+Reply from 192.168.20.10: bytes=32 time<1ms TTL=127 
+Reply from 192.168.20.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.20.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.20.10: bytes=32 time<1ms TTL=127
+Ping statistics for 192.168.20.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss).
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+C:\Users\PC1> 
+C:\Users\PC1> ping 192.168.99.2
+Pinging 192.168.99.2 with 32 bytes of data:
+Request timed out.
+Request timed out.
+Reply from 192.168.99.2: bytes=32 time=2ms TTL=254
+Reply from 192.168.99.2: bytes=32 time=1ms TTL=254	|
+Ping statistics for 192.168.99.2:
+    Packets: Sent = 4, Received = 2, Lost = 2 (50% loss). 
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 2ms, Average = 1ms
+C:\Users\PC1> </pre>
+        <h2>Router-on-a-Stick Inter-VLAN Routing Verification</h2>
+        <p>
+            In addition to using ping between devices, the following show commands can be used to verify and troubleshoot the router-on-a-stick configuration.
+        </p>
+        <li>show ip route</li>
+        <li>show ip interface brief</li>
+        <li>show interfaces </li>
+        <li>show interfaces trunk</li>
+        <br>
+        <div>
+            <button onclick="vlan(10)">show ip route</button>
+            <button onclick="vlan(11)" style="width: 300px;">show ip interface brief </button>
+            <button onclick="vlan(12)">show interfaces</button>
+            <button onclick="vlan(13)" style="width: 300px;">show interface trunk</button>
+        </div>
+        <p id="vlan-2"></p>
+        <h1>Inter-VLAN Routing using Layer 3 Switches</h1>
+        <h2>Layer 3 Switch Inter-VLAN Routing</h2>
+        <p>
+            Modern, enterprise networks rarely use router-on-a-stick because it does not scale easily to meet requirements. In these very large networks, network administrators use Layer 3 switches to configure inter-VLAN routing.
+            <br><br>
+            Inter-VLAN routing using the router-on-a-stick method is simple to implement for a small to medium-sized organization. However, a large enterprise requires a faster, much more scalable method to provide inter-VLAN routing.
+            <br><br>
+            Enterprise campus LANs use Layer 3 switches to provide inter-VLAN routing. Layer 3 switches use hardware-based switching to achieve higher-packet processing rates than routers. Layer 3 switches are also commonly implemented in enterprise distribution layer wiring closets.
+            <br><br>
+            Capabilities of a Layer 3 switch include the ability to do the following:
+        </p>
+        <li>Route from one VLAN to another using multiple switched virtual interfaces (SVIs).</li>
+        <li>Convert a Layer 2 switchport to a Layer 3 interface (i.e., a routed port). A routed port is similar to a physical interface on a Cisco IOS router.</li>
+        <p>To provide inter-VLAN routing, Layer 3 switches use SVIs. SVIs are configured using the same <b>interface vlan</b> <i>vlan-id</i> command used to create the management SVI on a Layer 2 switch. A Layer 3 SVI must be created for each of the routable VLANs.</p>
+        
+        <h2>Layer 3 Switch Configuration</h2>
+        <p>
+            In the figure, the Layer 3 switch, D1, is connected to two hosts on different VLANs. PC1 is in VLAN 10 and PC2 is in VLAN 20, as shown. The Layer 3 switch will provide inter-VLAN routing services to the two hosts.
+        </p>
+        <img src="https://i.pinimg.com/736x/3c/61/43/3c6143db36cf03b03102d6a82121f799.jpg" alt="">
+        <p>The table shows the IP addresses for each VLAN.</p>
+        <h3>D1 VLAN IP Addresses</h3>
+        <table>
+            <tr>
+                <th>VLAN Interface</th>
+                <th>IP Address</th>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>192.168.10.1/24</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>192.168.20.1/24</td>
+            </tr>
+        </table>
+        <h2>Layer 3 Switch Scenario</h2>
+        <p>
+            Complete the following steps to configure S1 with VLANs and trunking:
+            <br><br>
+            <br><b>Step 1.</b> Create the VLANs.
+            <br><b>Step 2.</b> Create the SVI VLAN interfaces.
+            <br><b>Step 3.</b> Configure access ports.
+            <br><b>Step 4.</b> Enable IP routing.
+        </p>
+        <button style="width: 300px;" onclick="vlan(14)">1. Create the VLANs</button>
+        <button style="width: 400px;" onclick="vlan(15)">2. Create the SVI VLAN interfaces</button>
+        <button style="width: 300px;" onclick="vlan(16)">3. Configure access ports</button>
+        <button onclick="vlan(17)">4.Enable IP routing</button>
+        <p id="vlan-3"></p>
+
+        <h2>Layer 3 Switch Inter-VLAN Routing Verification</h2>
+        <p>
+            Inter-VLAN routing using a Layer 3 switch is simpler to configure than the router-on-a-stick method. After the configuration is complete, the configuration can be verified by testing connectivity between the hosts.
+            <br><br>
+            From a host, verify connectivity to a host in another VLAN using the ping command. It is a good idea to first verify the current host IP configuration using the ipconfig Windows host command. The output confirms the IPv4 address and default gateway of PC1.
+        </p>
+        <pre>C:\Users\PC1> ipconfig
+Windows IP Configuration
+Ethernet adapter Ethernet0:
+  Connection-specific DNS Suffix . :
+  Link-local IPv6 Address          : fe80::5c43:ee7c:2959:da68%6
+  IPv4 Address                     : 192.168.10.10
+  Subnet Mask                      : 255.255.255.0
+  Default Gateway                  : 192.168.10.1
+C:\Users\PC1> </pre>
+        <p>
+            Next, verify connectivity with PC2 using the ping Windows host command, as shown in the output. The ping output successfully confirms inter-VLAN routing is operating.
+        </p>
+        <pre>C:\Users\PC1> ping 192.168.20.10
+Pinging 192.168.20.10 with 32 bytes of data:
+Reply from 192.168.20.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.20.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.20.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.20.10: bytes=32 time<1ms TTL=127
+Ping statistics for 192.168.20.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+C:\Users\PC1></pre>
+        <h2>Routing on a Layer 3 Switch</h2>
+        <p>
+            If VLANs are to be reachable by other Layer 3 devices, then they must be advertised using static or dynamic routing. To enable routing on a Layer 3 switch, a routed port must be configured.
+            <br><br>
+            A routed port is created on a Layer 3 switch by disabling the switchport feature on a Layer 2 port that is connected to another Layer 3 device. Specifically, configuring the no switchport interface configuration command on a Layer 2 port converts it into a Layer 3 interface. Then the interface can be configured with an IPv4 configuration to connect to a router or another Layer 3 switch.
+        </p>
+        <h2>Routing Scenario on a Layer 3 Switch</h2>
+        <p>
+            In the figure, the previously configured D1 Layer 3 switch is now connected to R1. R1 and D1 are both in an Open Shortest Path First (OSPF) routing protocol domain. Assume inter-VLAN has been successfully implemented on D1. The G0/0/1 interface of R1 has also been configured and enabled. Additionally, R1 is using OSPF to advertise its two networks, 10.10.10.0/24 and 10.20.20.0/24.
+            <br><br><b>Note: </b>OSPF routing configuration is covered in another course. In this module, OSPF configuration commands will be given to you in all activities and assessments. It is not required that you understand the configuration in order to enable OSPF routing on the Layer 3 switch.
+        </p>
+        <img src="https://i.pinimg.com/736x/7a/a3/bd/7aa3bd456491cc6cb50a1c5699f54583.jpg" alt="">
+
+        <h2>Routing Configuration on a Layer 3 Switch</h2>
+        <p>
+            Complete the following steps to configure D1 to route with R1:
+            <br>
+            <br><b>Step 1. </b>Configure the routed port.
+            <br><b>Step 2. </b>Enable routing.
+            <br><b>Step 3. </b>Configure routing.
+            <br><b>Step 4. </b>Verify routing.
+            <br><b>Step 5. </b>Verify connectivity.
+        </p>
+        <button style="width: 300px;" onclick="vlan(18)">1. Configure the routed port</button>
+        <button onclick="vlan(19)">2. Enable routing</button>
+        <button onclick="vlan(20)">3. Configure routing</button>
+        <button onclick="vlan(21)">4. Verify routing</button>
+        <button style="width: 300px;" onclick="vlan(22)">5. Verify connectivity</button>
+        <p id="vlan-4"></p>     
+        <h1>Troubleshoot Inter-VLAN Routing</h1>
+        <h2>Common Inter-VLAN Issues</h2>
+        <p>
+            By now, you know that when you configure and verify, you must also be able to troubleshoot. This topic discusses some common network problems associated with inter-VLAN routing.
+            <br><br>
+            There are a number of reasons why an inter-VAN configuration may not work. All are related to connectivity issues. First, check the physical layer to resolve any issues where a cable might be connected to the wrong port. If the connections are correct, then use the list in the table for other common reasons why inter-VLAN connectivity may fail.
+        </p>
+        <table>
+            <tr>
+                <th>Issue Type</th>
+                <th>How to Fix</th>
+                <th>How to Verify</th>
+            </tr>
+            <tr>
+                <td>Missing VLANs</td>
+                <td>
+                    <ul>
+                        <li>Create (or re-create) the VLAN if it does not exist</li>
+                        <li>Ensure host port is assigned to the correct VLAN.</li>
+                    </ul>
+                </td>
+                <td>
+                    <pre style="background-color: transparent; color: black;">show vlan [brief]<br>show interfaces switchport<br>ping</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Switch Trunk Port Issues</td>
+                <td>
+                    <ul>
+                        <li>Ensure trunks are configured correctly.</li>
+                        <li>Ensure port is a trunk port and enabled.</li>
+                    </ul>
+                </td>
+                <td>
+                    <pre style="background-color: transparent; color: black;">show interfaces trunk<br>show running-config</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Switch Access Port Issues</td>
+                <td>
+                    <ul>
+                        <li>Assign correct VLAN to access port.</li>
+                        <li>Ensure port is an access port and enabled.</li>
+                        <li>Host is incorrectly configured in the wrong subnet.</li>
+                    </ul>
+                </td>
+                <td>
+                    <pre style="background-color: transparent; color: black;">show interfaces switchport<br>show running-config interface<br>ipconfig</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Router Configuration Issues</td>
+                <td>
+                    <ul>
+                        <li>Router subinterface IPv4 address is incorrectly configured.</li>
+                        <li>Router subinterface is assigned to the VLAN ID.</li>
+                    </ul>
+                </td>
+                <td>
+                    <pre style="background-color: transparent; color: black;">show ip interface brief<br>show interfaces</pre>
+                </td>
+            </tr>
+        </table>
+        <h2>Troubleshoot Inter-VLAN Routing Scenario</h2>
+        <p>
+            Examples of some of these inter-VLAN routing problems will now be covered in more detail.
+            <br><br>
+            This topology will be used for all of these issues.
+            <br><br>
+            The physical network topology shows two PCs, two switches, and a router. PC1 has IP address 192.168.10.10/24, a default gateway of 192.168.10.1 and is in VLAN 10. PC2 has IP address 192.168.20.10/24, a default gateway of 192.168.20.1 and is in VLAN 20. PC1 connects to Switch S1 on switch port F0/6. PC2 connects to Switch S2 on switch port F0/18. Switch S1 and Switch S2 are interconnected to each other over a trunk link on switchport F0/1. Switch S1 is connected to router R1 over a trunk link on switch port F0/5 which connects to the G0/0/1 interfaces on R1. The management IP address on S1 is 192.168.99.2/24. The management IP address on S1 is 192.168.99.3/24
+        </p>
+        <img src="https://i.pinimg.com/736x/34/5d/9d/345d9d1925ab6e671bba756445a740a3.jpg" alt="">
+        <p>
+            The VLAN and IPv4 addressing information for R1 is shown in the table.
+        </p>
+        <h3>Router R1 Subinterfaces</h3>
+        <table>
+            <tr>
+                <th>Subinterface</th>
+                <th>VLAN</th>
+                <th>IP Address</th>
+            </tr>
+            <tr>
+                <td>G0/0/0.10</td>
+                <td>10</td>
+                <td>192.168.10.1/24</td>
+            </tr>
+            <tr>
+                <td>G0/0/0.20</td>
+                <td>20</td>
+                <td>192.168.20.1/24</td>
+            </tr>
+            <tr>
+                <td>G0/0/0.30</td>
+                <td>30</td>
+                <td>192.168.30.1/24</td>
+            </tr>
+        </table>
+        <h2>Missing VLANs</h2>
+        
+        <p>
+            An inter-VLAN connectivity issue could be caused by a missing VLAN. The VLAN could be missing if it was not created, it was accidently deleted, or it is not allowed on the trunk link.
+            <br><br>
+            For example, PC1 is currently connected to VLAN 10, as shown in the show vlan brief command output.
+        </p>
+        <pre>S1# show vlan brief
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/2, Fa0/3, Fa0/4, Fa0/7
+                                                Fa0/8, Fa0/9, Fa0/10, Fa0/11
+                                                Fa0/12, Fa0/13, Fa0/14, Fa0/15
+                                                Fa0/16, Fa0/17, Fa0/18, Fa0/19
+                                                Fa0/20, Fa0/21, Fa0/22, Fa0/23
+                                                Fa0/24, Gi0/1, Gi0/2
+10   LAN10                            active    Fa0/6
+20   LAN20                            active
+99   Management                       active
+1002 fddi-default                     act/unsup
+1003 token-ring-default               act/unsup
+1004 fddinet-default                  act/unsup
+1005 trnet-default                    act/unsup
+S1#</pre>
+        <p>Now assume that VLAN 10 is accidently deleted, as shown in the following output.</p>
+        <pre>
+S1(config)# no vlan 10
+S1(config)# do show vlan brief
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/2, Fa0/3, Fa0/4, Fa0/7
+                                                Fa0/8, Fa0/9, Fa0/10, Fa0/11
+                                                Fa0/12, Fa0/13, Fa0/14, Fa0/15
+                                                Fa0/16, Fa0/17, Fa0/18, Fa0/19
+                                                Fa0/20, Fa0/21, Fa0/22, Fa0/23
+                                                Fa0/24, Gi0/1, Gi0/2
+20   LAN20                            active
+99   Management                       active
+1002 fddi-default                     act/unsup
+1003 token-ring-default               act/unsup
+1004 fddinet-default                  act/unsup
+1005 trnet-default                    act/unsup
+S1(config)#
+        </pre>
+        <p>Notice VLAN 10 is now missing from the output. Also notice that port Fa0/6 has not been reassigned to the default VLAN. The reason is because when you delete a VLAN, any ports assigned to that VLAN become inactive. They remain associated with the VLAN (and thus inactive) until you assign them to a new VLAN or recreate the missing VLAN.
+            <br><br>
+            Use the show interface interface-id switchport command to verify the VLAN membership.</p>
+        <pre>S1(config)# do show interface fa0/6 switchport
+Name: Fa0/6
+Switchport: Enabled
+Administrative Mode: static access
+Operational Mode: static access
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: native
+Negotiation of Trunking: Off
+<b style="color: yellow;">Access Mode VLAN: 10 (Inactive)</b>
+Trunking Native Mode VLAN: 1 (default)
+Administrative Native VLAN tagging: enabled
+Voice VLAN: none
+(Output omitted)</pre>  
+        <p>Recreating the missing VLAN would automatically reassign the hosts to it, as shown in the following output.</p>
+        <pre>S1(config)# vlan 10
+S1(config-vlan)# do show vlan brief
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/2, Fa0/3, Fa0/4, Fa0/7
+                                                Fa0/8, Fa0/9, Fa0/10, Fa0/11
+                                                Fa0/12, Fa0/13, Fa0/14, Fa0/15
+                                                Fa0/16, Fa0/17, Fa0/18, Fa0/19
+                                                Fa0/20, Fa0/21, Fa0/22, Fa0/23
+                                                Fa0/24, Gi0/1, Gi0/2
+20   LAN20                            active
+99   Management                       active
+1002 fddi-default                     act/unsup
+1003 token-ring-default               act/unsup
+1004 fddinet-default                  act/unsup
+1005 trnet-default                    act/unsup
+S1(config-vlan)#</pre>
+        <p>
+            Notice that the VLAN has not been created as expected. The reason is because you must exit from VLAN sub-configuration mode to create the VLAN, as shown in the following output.
+        </p>
+        <pre>S1(config-vlan)# exit
+S1(config)# vlan 10
+S1(config)# do show vlan brief
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/2, Fa0/3, Fa0/4, Fa0/7
+                                                Fa0/8, Fa0/9, Fa0/10, Fa0/11
+                                                Fa0/12, Fa0/13, Fa0/14, Fa0/15
+                                                Fa0/16, Fa0/17, Fa0/18, Fa0/19
+                                                Fa0/20, Fa0/21, Fa0/22, Fa0/23
+                                                Fa0/24, Gi0/1, Gi0/2
+10   VLAN0010                         active    Fa0/6
+20   LAN20                            active
+99   Management                       active
+1002 fddi-default                     act/unsup
+1003 token-ring-default               act/unsup
+1004 fddinet-default                  act/unsup
+1005 trnet-default                    act/unsup
+S1(config)#</pre>
+        <p>Now notice that the VLAN is included in the list and that the host connected to Fa0/6 is on VLAN 10.</p>
+        <h2>Switch Trunk Port Issues</h2>
+        <p>
+            Another issue for inter-VLAN routing includes misconfigured switch ports. In a legacy inter-VLAN solution, this could be caused when the connecting router port is not assigned to the correct VLAN.
+            <br><br>
+            However, with a router-on-a-stick solution, the most common cause is a misconfigured trunk port.
+            <br><br>
+            For example, assume PC1 was able to connect to hosts in other VLANs until recently. A quick look at maintenance logs revealed that the S1 Layer 2 switch was recently accessed for routine maintenance. Therefore, you suspect the problem may be related to that switch.
+            <br><br>
+            The physical network topology shows two PCs, two switches, and a router. PC1 has IP address 192.168.10.10/24, a default gateway of 192.168.10.1 and is in VLAN 10. PC2 has IP address 192.168.20.10/24, a default gateway of 192.168.20.1 and is in VLAN 20. PC1 connects to Switch S1 on switch port F0/6. PC2 connects to Switch S2 on switch port F0/18. Switch S1 and Switch S2 are interconnected to each other over a trunk link on switchport F0/1. Switch S1 is connected to router R1 over a trunk link on switch port F0/5 which connects to the G0/0/1 interfaces on R1. The management IP address on S1 is 192.168.99.2/24. The management IP address on S1 is 192.168.99.3/24
+        </p>
+        <img src="https://i.pinimg.com/736x/8c/37/37/8c3737661dda2b935ffe329b974752d8.jpg" alt="">
+        <p>On S1, verify that the port connecting to R1 (i.e., F0/5) is correctly configured as a trunk link using the show interfaces trunk command, as shown.</p>
+        <pre>S1# show interfaces trunk
+Port        Mode             Encapsulation  Status        Native vlan
+Fa0/1       on               802.1q         trunking      1
+Port        Vlans allowed on trunk
+Fa0/1       1-4094
+Port        Vlans allowed and active in management domain
+Fa0/1       1,10,20,99
+Port        Vlans in spanning tree forwarding state and not pruned
+Fa0/1       1,10,20,99
+S1#</pre>
+        <p>
+            The Fa0/5 port connecting to R1 is mysteriously missing from the output. Verify the interface configuration using the show running-config interface fa0/5 command, as shown.
+        </p>
+        <pre>S1# show running-config | include interface fa0/5
+Building configuration...
+Current configuration : 96 bytes
+!
+interface FastEthernet0/5
+ description Trunk link to R1
+ switchport mode trunk
+ shutdown
+end
+S1#</pre>
+        <p>
+            As you can see, the port was accidently shut down. To correct the problem, re-enable the port and verify the trunking status, as shown in the output.
+        </p>
+        <pre>S1(config)# interface fa0/5
+S1(config-if)# no shut
+S1(config-if)#
+*Mar  1 04:46:44.153: %LINK-3-UPDOWN: Interface FastEthernet0/5, changed state to up
+S1(config-if)#
+*Mar  1 04:46:47.962: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/5, changed state to up
+S1(config-if)# do show interface trunk
+Port        Mode             Encapsulation  Status        Native vlan
+Fa0/1       on               802.1q         trunking      1
+Fa0/5       on               802.1q         trunking      1
+Port        Vlans allowed on trunk
+Fa0/1       1-4094
+Fa0/5       1-4094
+Port        Vlans allowed and active in management domain
+Fa0/1       1,10,20,99
+Fa0/5       1,10,20,99
+Port        Vlans in spanning tree forwarding state and not pruned
+Fa0/1       1,10,20,99
+Fa0/1       1,10,20,99
+S1(config-if)#</pre>
+        <p>To reduce the risk of a failed inter-switch link disrupting inter-VLAN routing, redundant links and alternate paths should be part of the network design.</p>
+        <h2>Switch Access Port Issues</h2>
+        <p>
+            When a problem is suspected with a switch access port configuration, use verification commands to examine the configuration and identify the problem.
+            <br><br>
+            Assume PC1 has the correct IPv4 address and default gateway but is not able to ping its own default gateway. PC1 is supposed to be connected to a VLAN 10 port.
+        </p>
+        <img src="https://i.pinimg.com/736x/8c/37/37/8c3737661dda2b935ffe329b974752d8.jpg" alt="">
+        <p>Verify the port configuration on S1 using the show interfaces interface-id switchport command.</p>
+        <pre>S1# show interface fa0/6 switchport
+Name: Fa0/6
+Switchport: Enabled
+Administrative Mode: static access
+Operational Mode: static access
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: native
+Negotiation of Trunking: Off
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 1 (default)
+Administrative Native VLAN tagging: enabled
+Voice VLAN: none</pre>
+        <p>
+            The Fa0/6 port has been configured as an access port as indicated by “static access”. However, it appears that it has not been configured to be in VLAN 10. Verify the configuration of the interface.
+        </p>
+        <pre>S1# show running-config interface fa0/6
+Building configuration...
+Current configuration : 87 bytes
+!
+interface FastEthernet0/6
+ description PC-A access port
+ switchport mode access
+end
+S1#</pre>
+        <p>Assign port Fa0/6 to VLAN 10 and verify the port assignment.</p>
+        <pre>S1# configure terminal
+S1(config)# interface fa0/6
+S1(config-if)# switchport access vlan 10
+S1(config-if)# 
+S1(config-if)# do show interface fa0/6 switchport
+Name: Fa0/6
+Switchport: Enabled
+Administrative Mode: static access
+Operational Mode: static access
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: native
+Negotiation of Trunking: Off
+Access Mode VLAN: 10 (VLAN0010)
+Trunking Native Mode VLAN: 1 (default)
+Administrative Native VLAN tagging: enabled
+Voice VLAN: none
+(Output omitted)</pre>
+        <p>PC1 is now able to communicate with hosts on other VLANs.</p>
+        <h2>Router Configuration Issues</h2>
+        <p>Router-on-a-stick configuration problems are usually related to subinterface misconfigurations. For example, an incorrect IP address was configured or the wrong VLAN ID was assigned to the subinterface.
+            <br><br>
+            For example, R1 should be providing inter-VLAN routing for users in VLANs 10, 20, and 99. However, users in VLAN 10 cannot reach any other VLAN.</p>
+        <img src="https://i.pinimg.com/736x/8c/37/37/8c3737661dda2b935ffe329b974752d8.jpg" alt="">
+        <p>You verified the switch trunk link and all appears to be in order. Verify the subinterface status using the show ip interface brief command.</p>
+        <pre>R1# show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol
+GigabitEthernet0/0/0   unassigned      YES unset  administratively down down
+GigabitEthernet0/0/1   unassigned      YES unset  up                    up
+Gi0/0/1.10             192.168.10.1    YES manual up                    up
+Gi0/0/1.20             192.168.20.1    YES manual up                    up
+Gi0/0/1.99             192.168.99.1    YES manual up                    up
+Serial0/1/0            unassigned      YES unset  administratively down down
+Serial0/1/1            unassigned      YES unset  administratively down down
+R1#</pre>
+        <p>The subinterfaces have been assigned the correct IPv4 addresses and they are operational.
+        <br><br>
+        Verify which VLANs each of the subinterfaces is on. To do so, the show interfaces command is useful but it generates a great deal of additional unrequired output. The command output can be reduced using IOS command filters as shown in the output.</p>
+        <pre>R1# show interfaces | include Gig|802.1Q
+GigabitEthernet0/0/0 is administratively down, line protocol is down
+GigabitEthernet0/0/1 is up, line protocol is up
+  Encapsulation 802.1Q Virtual LAN, Vlan ID  1., loopback not set
+GigabitEthernet0/0/1.10 is up, line protocol is up
+  Encapsulation 802.1Q Virtual LAN, Vlan ID  100.
+GigabitEthernet0/0/1.20 is up, line protocol is up
+  Encapsulation 802.1Q Virtual LAN, Vlan ID  20.
+GigabitEthernet0/0/1.99 is up, line protocol is up
+  Encapsulation 802.1Q Virtual LAN, Vlan ID  99.
+R1#</pre>
+        <p>
+            The pipe symbol (|) along with some select keywords is a useful method to help filter command output. In this example, the keyword include was used to identify that only lines containing the letters “Gig” or “802.1Q” will be displayed. Because of the way the show interface output is naturally listed, using these filters produces a condensed list of interfaces and their assigned VLANs.
+            <br><br>
+            Notice that the G0/0/1.10 interface has been incorrectly assigned to VLAN 100 instead of VLAN 10. This is confirmed by looking at the configuration of the R1 GigabitEthernet 0/0/1.10 subinterface, as shown.
+        </p>
+        <pre>R1# show running-config interface g0/0/1.10
+Building configuration...
+Current configuration : 146 bytes
+!
+interface GigabitEthernet0/0/1.10
+ description Default Gateway for VLAN 10
+ encapsulation dot1Q 100
+ ip address 192.168.10.1 255.255.255.0
+end
+R1#</pre>
+        <p>To correct this problem, configure subinterface G0/0/1.10 to be on the correct VLAN using the encapsulation dot1q 10 subinterface configuration mode command.</p>
+        <pre>R1# conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)# interface gigabitEthernet 0/0/1.10
+R1(config-subif)# encapsulation dot1Q 10
+R1(config-subif)# end
+R1#
+R1# show interfaces | include Gig|802.1Q
+GigabitEthernet0/0/0 is administratively down, line protocol is down
+GigabitEthernet0/0/1 is up, line protocol is up
+  Encapsulation 802.1Q Virtual LAN, Vlan ID  1., loopback not set
+GigabitEthernet0/0/1.10 is up, line protocol is up
+  Encapsulation 802.1Q Virtual LAN, Vlan ID  10.
+GigabitEthernet0/0/1.20 is up, line protocol is up
+  Encapsulation 802.1Q Virtual LAN, Vlan ID  20.
+GigabitEthernet0/0/1.99 is up, line protocol is up
+R1#  </pre>
+        <p>
+            When the subinterface has been assigned to the correct VLAN, it is accessible by devices on that VLAN and the router can perform inter-VLAN routing.
+            <br><br>
+            With verification, router configuration problems are quickly addressed, allowing inter-VLAN routing to function properly.
+        </p>`,
   };
   if (number == 1) {
     document.getElementById('content').innerHTML = noiDung[1];
@@ -1886,7 +2955,35 @@ In STP: no
     document.getElementById('content').innerHTML = noiDung[2];
   } else if (number == 3)  {
     document.getElementById('content').innerHTML = noiDung[3];
+  } else if (number == 4)  {
+    document.getElementById('content').innerHTML = noiDung[4];
   }
+}
+const images = [
+    "https://i.pinimg.com/736x/36/7f/ba/367fba4c897990000848b9f5f4f504a8.jpg", 
+    "https://i.pinimg.com/736x/47/e4/67/47e46760442134d092f91c23ad88cc0b.jpg", 
+    "https://i.pinimg.com/736x/ac/bf/7f/acbf7f76fd36a90a711b7f3638d215e2.jpg", 
+    "https://i.pinimg.com/736x/6e/5c/4a/6e5c4a67bc71b3d72923e69e5ebb2ebe.jpg",
+    "https://i.pinimg.com/736x/a3/a9/ae/a3a9aede2e5a57d92897ffaa520e4ff2.jpg",
+    "https://i.pinimg.com/736x/37/d1/7e/37d17edd13d9560a4b5ac7829ac7d99b.jpg",
+    "https://i.pinimg.com/736x/bf/1b/fc/bf1bfca46f3807e394a49b2254d8c1ff.jpg",
+    "https://i.pinimg.com/736x/cf/18/f1/cf18f121d19513a5dc207ddd83e6c885.jpg",
+    "https://i.pinimg.com/736x/cc/cc/08/cccc0862df652eb29f16584f9c55c4c7.jpg",
+    "https://i.pinimg.com/736x/a9/80/ca/a980ca3b2d937f002bd8a2d57dd89690.jpg",
+    "https://i.pinimg.com/736x/4d/e8/a2/4de8a2a92e7b24f5342c196474eb0f65.jpg",
+    "https://i.pinimg.com/736x/0b/4a/02/0b4a0204401b00601fa2f159980b61b7.jpg",
+    "https://i.pinimg.com/736x/51/8a/0e/518a0e551c0d384168e0750c7abb8054.jpg",
+    "https://i.pinimg.com/736x/37/d1/7e/37d17edd13d9560a4b5ac7829ac7d99b.jpg",
+    "https://i.pinimg.com/736x/ab/5a/49/ab5a49e073b2464a55ea455433f8ce7f.jpg",
+    "https://i.pinimg.com/736x/41/ed/a6/41eda6130e4a08ca3308baa1c8f307db.jpg",
+    "https://i.pinimg.com/736x/42/53/c8/4253c8713a4eaffb330c4e56b4523df3.jpg"
+];
+let currentIndex = 0;
+
+function changeImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById('myImage').src = images[currentIndex];
+    document.getElementById('pages').innerHTML = currentIndex+1;
 }
 (function() {
   content(1);

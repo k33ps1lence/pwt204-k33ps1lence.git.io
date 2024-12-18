@@ -32,6 +32,9 @@ h3 {
 p {
     padding: 10px 20px;
 }
+li {
+   margin-left: 30px; 
+}
 .header {
     display: flex;
     width: 100%;
@@ -198,4 +201,12 @@ td {
 }
 th {
     background-color: #acadaf;
+}
+.conten-part {
+    margin-top: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 10px 20px;
+    background-color: rgb(242, 255, 242);
+    border-radius: 10px;
 }

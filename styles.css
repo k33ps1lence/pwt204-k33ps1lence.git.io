@@ -1,6 +1,7 @@
-* {
+body {
     margin: 0;
     padding: 0;
+    height: 50vh;
 }
 .header {
     display: flex;
@@ -11,6 +12,16 @@
     background-color: azure;
     box-shadow: 0 6px 7px rgba(0, 0, 0, 0.1);
     position: relative;
+}
+button {
+    width: 200px;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #308128;
+    border: 1px;
+    color: aliceblue;
+    cursor: pointer;
 }
 .align-side {
     flex: 1 1 20%;
