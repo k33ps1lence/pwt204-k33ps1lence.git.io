@@ -295,10 +295,112 @@ mv: cannot move ‘demo.txt’ to ‘/home/demo.txt’: Operation not permitted<
     <p>5. Finally, try to copy that file</p>
     <pre>[root@localhost ~]# cp demo.txt /home</pre>
     </div>`,
+    2: `<div class="title">
+            <h1>LAB 2 -  Configuring Basic Security Controls on a CentOS Linux Server</h1>
+        </div>
+        <div class="content">
+            <p>
+                In this lab series, you will configure basic security controls on a CentOS Linux server using various firewall tools, 
+                including iptables, nftables, and firewalld. The objectives for each part of the lab are as follows: 
+                <br><b>4.1 – Basic iptables usage:</b>
+                <ul>
+                    <li>Understand the basics of iptables.</li>
+                    <li>Disable the Uncomplicated Firewall (ufw) and work directly with iptables.</li>
+                    <li>Create a basic firewall configuration allowing SSH access, DNS queries, and ICMP, while denying all orther incoming traffic.</li>
+                    <li>Verify the iptables rules and make them persistent.</li>
+                    <li>Practice using snapshots for system recovery.</li>
+                </ul>
+                <b>4.2 - Blocking invalid IPv4 packets:</b>
+                <ul>
+                    <li>View existing rules in filter and mangle tables.</li>
+                    <li>Block invalid IPv4 packets and TCP packetsthat don't have the SYN flag set.</li>
+                    <li>Observe the effects of blocking invalid packets.</li>
+                    <li>Improve firewall efficiency using the PREROUTING chain of the mangle table.</li>
+                </ul>
+                <b>4.3 Configure ip6tables:</b>
+                <ul>
+                    <li>Create an IPv6 firewall alongside an existing IPv4 firewall.</li>
+                    <li>Block invalid IPv6 packets and TCP packets without the SYN flag.</li>
+                    <li>Test the IPv6 firewall with Nmap scans</li>
+                    <li>Observe the rules and packet counters for IPv6</li>
+                </ul>
+                <b>4.4 - Configure nftables on Ubuntu:</b>
+                <ul>
+                    <li>Set up nftables on an Ubuntu virtual machine.</li>
+                    <li>Create a custom firewall configuration with nftables.</li>
+                    <li>Test the firewall be performing Nmap scans.</li>
+                    <li>Observe the rules and packet counters in the nftables configuration.</li>
+                    <li>Learn to block invalid packets with nftables.</li>
+                </ul>
+                <b>4.5 - Basic ufw usage:</b>
+                <ul>
+                    <li>Work with the Uncomplicated Firewall (ufw) on Ubuntu.</li>
+                    <li>Enable, configure, and disable ufw.</li>
+                    <li>Open specific ports and services using ufw.</li>
+                    <li>Motify ufw configuration files for advanced rules.</li>
+                    <li>Obverse the effects of ufw rules on iptables or nftables.</li>
+                </ul>
+                <b>4.6 - Firewalld commands:</b>
+                <ul>
+                    <li>Learn firewalld basics on CentOS or Almalinux.</li>
+                    <li>Explore firewalld zones, services, and predefined rules.</li>
+                    <li>Modify the defaultzone and add services.</li>
+                    <li>Block ICMP types, log denied packets, and set firewall rules.</li>
+                    <li>View, compare, and make runtime and permanent firewall configurations.</li>
+                    <li>Use direct rules to block invalid packets and observe their effects.</li>
+                    <li>Test firewall configirations with Nmap scanes.</li>
+                    <li>Explore firewalld-related man pages.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="content">
+            <h2>Some Important Concepts</h2>
+            <p>
+                <b>What is Firewall?</b>
+                <br>A firewall is a network security device or software designed to monitor, control, and filter incoming and outgoing network traffic based on predefined security rules. It acts as a barrier between a trusted internal network and untrusted external networks, such as the internet, to protect the system from unauthorized access and cyber threats.
+            </p>
+            <p>
+                <b>What is iptables?</b>
+                <br><b>iptable</b> is a command-line tool for setting up, maintaining, and testing firewall tables in Linux. It controls network filtering, dropping or allowing packets based on defined rules.
+            </p>
+        </div>
+        <div class="content">
+            <h2>4.1 - Basic iptables usage</h2>
+            <pre>sudo iptables -L</pre>
+            <p>
+                Lists the current rules in all chains (INPUT, OUTPUT, FORWARD) and default tables (filter).
+            </p>
+            <pre>sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</pre>
+            <pre>sudo iptables -A INPUT -p tcp --dport ssh -j ACCEPT</pre>
+            <pre>sudo iptables -A INPUT -p tcp --dport 53 -j ACCEPT</pre>
+            <pre>sudo iptables -A INPUT -p udp --dport 53 -j ACCEPT</pre>
+            <pre>sudo iptables -A INPUT -m conntrack -p icmp --icmp-type 3 --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT</pre>
+            <pre>sudo iptables -A INPUT -m conntrack -p icmp --icmp-type 11 --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT</pre>
+            <pre>sudo iptables -A INPUT -m conntrack -p icmp --icmp-type 12 --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT</pre>
+            <pre>sudo iptables -A INPUT -j DROP</pre>
+        </div>
+        <div class="content">
+            <h2>4.2 - Blocking invalid IPv4 packets</h2>
+        </div>
+        <div class="content">
+            <h2>4.3 - Configure ip6tables</h2>
+        </div>
+        <div class="content">
+            <h2>4.4 - Configure nftables on Ubuntu</h2>
+        </div>
+        <div class="content">
+            <h2>4.5 - Basic ufw usage</h2>
+        </div>
+        <div class="content">
+            <h2>4.6 - Firewalld commands</h2>
+        </div>`,
     };
     switch (number) {
         case 1:
             document.getElementById('lab-01').innerHTML = content[1];
+            break;
+        case 2:
+            document.getElementById('lab-01').innerHTML = content[2];
             break;
     }
 
